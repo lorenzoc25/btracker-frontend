@@ -18,7 +18,7 @@ import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 const Nav = () => {
   const { colorMode, toggleColorMode } = useColorMode();
   const isLoggedIn : boolean = false;
-  const userButton = <>
+  const userButton = (<>
           <MenuButton
           as={Button}
           rounded={'full'}
@@ -45,8 +45,8 @@ const Nav = () => {
               <MenuItem>Account Settings</MenuItem>
               <MenuItem>Logout</MenuItem>
           </MenuList>
-        </>;
-  const signInBtnGroup = <>
+        </>);
+  const signInBtnGroup = (<>
       <Stack
             flex={{ base: 1, md: 0 }}
             justify={'flex-end'}
@@ -61,6 +61,7 @@ const Nav = () => {
               Sign In
             </Button>
             <Button
+              as={'a'}
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'sm'}
               fontWeight={600}
@@ -73,7 +74,7 @@ const Nav = () => {
               Sign Up
             </Button>
           </Stack>  
-      </>;
+      </>);
   return (
       <>
         <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>

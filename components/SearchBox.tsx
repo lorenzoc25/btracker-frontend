@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputGroup, Input, Button, Flex} from '@chakra-ui/react';
+import { InputGroup, Input, Button, Flex } from '@chakra-ui/react';
 // import styles from '../styles/SearchBox.module.css';
 
 const SearchBox = () => {
