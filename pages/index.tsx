@@ -2,9 +2,12 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import SearchBox from '../components/SearchBox';
+import Nav from '../components/Nav';
 
 const Home: NextPage = () => {
   return (
+    <>
+    <Nav />
     <div className={styles.container}>
       <Head>
         <title>Index</title>
@@ -20,6 +23,7 @@ const Home: NextPage = () => {
       </main>
       
     </div>
+    </>
   );
 };
 
