@@ -6,6 +6,8 @@ import {
 } from '@chakra-ui/react';
 import { extendTheme, ThemeConfig } from '@chakra-ui/react';
 
+import { AppProvider } from '../context/context';
+
 const config : ThemeConfig = {
   initialColorMode: 'light',
   useSystemColorMode: true,
@@ -22,7 +24,9 @@ const App = ({
       colorModeManager={localStorageManager}
       theme={theme}
     >
-      <Component {...pageProps} />
+      <AppProvider>
+        <Component {...pageProps} />
+      </AppProvider>
     </ChakraProvider>
   );
 };
