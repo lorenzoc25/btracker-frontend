@@ -1,3 +1,5 @@
+import '../styles/globals.css';
+import { AppProps } from 'next/app';
 import {
   ChakraProvider,
   localStorageManager,
