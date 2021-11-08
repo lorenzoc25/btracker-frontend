@@ -16,22 +16,26 @@ import {
   FormControl,
   FormHelperText,
   InputRightElement,
+  useColorModeValue,
 } from '@chakra-ui/react';
 import { FaUserAlt, FaLock } from 'react-icons/fa';
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
+
 const Login : NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleShowClick = () => setShowPassword(!showPassword);
-
+  const bgColor = useColorModeValue('gray.200', 'gray.800');
+  const iconColor = useColorModeValue('gray.300', 'gray.100');
+  const boxColor = useColorModeValue('whiteAlpha.900', 'gray.700');
   return (
     <Flex
       flexDirection="column"
       width="100wh"
       height="100vh"
-      backgroundColor="gray.200"
+      backgroundColor={bgColor}
       justifyContent="center"
       alignItems="center"
     >
@@ -48,7 +52,7 @@ const Login : NextPage = () => {
             <Stack
               spacing={4}
               p="1rem"
-              backgroundColor="whiteAlpha.900"
+              backgroundColor={boxColor}
               boxShadow="md"
               borderRadius='0.5em'
             >
@@ -56,7 +60,7 @@ const Login : NextPage = () => {
                 <InputGroup marginTop='0.5em'>
                   <InputLeftElement
                     pointerEvents="none"
-                    children={<CFaUserAlt color="gray.300" />}
+                    children={<CFaUserAlt color={iconColor} />}
                   />
                   <Input type="email" placeholder="Email Address" />
                 </InputGroup>
@@ -65,8 +69,8 @@ const Login : NextPage = () => {
                 <InputGroup>
                   <InputLeftElement
                     pointerEvents="none"
-                    color="gray.300"
-                    children={<CFaLock color="gray.300" />}
+                    color={iconColor}
+                    children={<CFaLock color={iconColor} />}
                   />
                   <Input
                     type={showPassword ? 'text' : 'password'}
