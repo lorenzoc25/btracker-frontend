@@ -3,8 +3,24 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import SearchBox from '../components/SearchBox';
 import Nav from '../components/Nav';
+import Item from '../components/Item';
+import { Package, History, Status } from '../types/Package';
 
 const Home: NextPage = () => {
+  const hist :History = {
+    status : 'delievered',
+    location: 'Los Angeles',
+    timestamp: 114514,
+  };
+
+  const p : Package = {
+    tracking : '114514',
+    name : 'First Package',
+    carrier: '顺丰快递',
+    history: hist,
+    status : Status.Delivered,
+  };
+
   return (
     <>
     <Nav />
@@ -21,7 +37,7 @@ const Home: NextPage = () => {
         </h1>
         <SearchBox />
       </main>
-      
+      <Item item={p}/>
     </div>
     </>
   );
