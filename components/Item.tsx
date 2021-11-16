@@ -1,5 +1,5 @@
 import React from 'react';
-import { Package, Status } from '../types/Package';
+import { Package, Status } from '../types/package';
 import { chakra, Box, Flex, useColorModeValue, Link } from '@chakra-ui/react';
 
 import { AiFillCaretDown } from 'react-icons/ai';

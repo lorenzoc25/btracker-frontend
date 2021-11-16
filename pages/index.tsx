@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css';
 import SearchBox from '../components/SearchBox';
 import Nav from '../components/Nav';
 import Item from '../components/Item';
-import { Package, History, Status } from '../types/Package';
+import { Package, History, Status } from '../types/package';
 
 const Home: NextPage = () => {
   const hist :History = {
