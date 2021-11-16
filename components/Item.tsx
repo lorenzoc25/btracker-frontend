@@ -22,6 +22,9 @@ const getStatusColor = (status: Status ): string[] =>  {
 
 const Item = ({ item }: ItemProps) => {
   const statColor = getStatusColor(item.status);
+  const { location, timestamp } = item.history;
+  const date = new Date(timestamp);
+  const dateStr = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate();
   return (
     <Flex
       p={50}
@@ -91,9 +94,10 @@ const Item = ({ item }: ItemProps) => {
             >
                 {item.status}
             </chakra.p>
-            
           </Flex>
-
+          <Flex>
+              Package was last seen at {location} on {dateStr}
+          </Flex>
           <Flex alignItems="center" justifyContent="center" mt={4}>
             <Link
               mr={2}

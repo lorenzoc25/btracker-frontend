@@ -10,7 +10,7 @@ const Home: NextPage = () => {
   const hist :History = {
     status : 'delievered',
     location: 'Los Angeles',
-    timestamp: 114514,
+    timestamp: 1145141919810,
   };
 
   const p : Package = {
