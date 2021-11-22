@@ -15,9 +15,12 @@ import {
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
-const Nav = () => {
+interface NavProps {
+  isLoggedIn: boolean;
+}
+
+const Nav = ({ isLoggedIn } : NavProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
-  const isLoggedIn : boolean = false;
   const userButton = (<>
           <MenuButton
           as={Button}
@@ -27,13 +30,11 @@ const Nav = () => {
           minW={0}>
           <Avatar
               size={'sm'}
-              src={'https://avatars.dicebear.com/api/male/username.svg'} />
+           />
               </MenuButton><MenuList alignItems={'center'}>
               <br />
               <Center>
-                  <Avatar
-                      size={'2xl'}
-                      src={'https://avatars.dicebear.com/api/male/username.svg'} />
+                  <Avatar />
               </Center>
               <br />
               <Center>
@@ -41,8 +42,7 @@ const Nav = () => {
               </Center>
               <br />
               <MenuDivider />
-              <MenuItem>Your Servers</MenuItem>
-              <MenuItem>Account Settings</MenuItem>
+              <MenuItem>Your Packages</MenuItem>
               <MenuItem>Logout</MenuItem>
           </MenuList>
         </>);

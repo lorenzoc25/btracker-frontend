@@ -23,7 +23,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-    <Nav />
+    <Nav isLoggedIn={true}/>
     <div className={styles.container}>
       <Head>
         <title>Index</title>
