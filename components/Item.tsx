@@ -1,8 +1,14 @@
 import React from 'react';
 import { Package, Status } from '../types/package';
-import { chakra, Box, Flex, useColorModeValue, Link } from '@chakra-ui/react';
-
-import { AiFillCaretDown } from 'react-icons/ai';
+import { chakra, Box, Flex, useColorModeValue } from '@chakra-ui/react';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+} from '@chakra-ui/react';
+import { AiOutlineEdit, TiDelete } from 'react-icons/ai';
 
 interface ItemProps {
   item: Package;
@@ -98,16 +104,20 @@ const Item = ({ item }: ItemProps) => {
           <Flex>
               Package was last seen at {location} on {dateStr}
           </Flex>
-          <Flex alignItems="center" justifyContent="center" mt={4}>
-            <Link
-              mr={2}
-              color={useColorModeValue('gray.800', 'gray.400')}
-              _hover={{ color: useColorModeValue('gray.700', 'gray.300') }}
-              cursor="pointer"
-            >
-              <AiFillCaretDown />
-            </Link>
-          </Flex>
+              <Accordion allowToggle>
+                <AccordionItem border='hidden'>
+                    <AccordionButton mr={2} _hover={{ color: useColorModeValue('gray.700', 'gray.300') } } _focus={ { boxShadow: 'none' } } textAlign="center" padding={0}>  
+                      <AccordionIcon marginX='auto' />   
+                    </AccordionButton>
+
+                  <AccordionPanel px={0} pb='1em'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                    commodo consequat.
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
         </Box>
       </Box>
     </Flex>

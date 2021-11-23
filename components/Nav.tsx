@@ -86,7 +86,6 @@ const Nav = ({ isLoggedIn } : NavProps) => {
                 <Button onClick={toggleColorMode}>
                   {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                 </Button>
-  
                 <Menu>
                   {isLoggedIn ? userButton : signInBtnGroup}
                 </Menu>
