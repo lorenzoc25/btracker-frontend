@@ -1,15 +1,27 @@
 import React from 'react';
 import { Package, Status } from '../types/package';
-import { chakra, Box, Flex, useColorModeValue } from '@chakra-ui/react';
-import {
+import { 
+  chakra, 
+  Box,
+  Button,
+  Flex, 
+  useColorModeValue,
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   AccordionIcon,
+  useDisclosure,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from '@chakra-ui/react';
-import { AiOutlineEdit, TiDelete } from 'react-icons/ai';
-
+import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
+import ConfirmPopup from './ConfirmPopup';
 interface ItemProps {
   item: Package;
 }
@@ -31,6 +43,7 @@ const Item = ({ item }: ItemProps) => {
   const { location, timestamp } = item.history;
   const date = new Date(timestamp);
   const dateStr = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Flex
       p={50}
@@ -52,7 +65,7 @@ const Item = ({ item }: ItemProps) => {
             fontSize="sm"
             color={useColorModeValue('gray.800', 'gray.400')}
           >
-            {item.tracking}
+            {item.carrier} - {item.tracking}
           </chakra.span>
           <chakra.span
             bg={useColorModeValue('brand.200', 'brand.300')}
@@ -60,10 +73,36 @@ const Item = ({ item }: ItemProps) => {
             px={3}
             py={1}
             rounded="full"
-            textTransform="uppercase"
-            fontSize="xs"
           >
-            {item.carrier}
+          <Flex >
+            <Button onClick={onOpen} background='none' p={0}>
+                <AiOutlineEdit />
+            </Button>
+              <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>Modal Title</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    test
+                  </ModalBody>
+
+                  <ModalFooter>
+                    <Button colorScheme="blue" mr={3} onClick={onClose}>
+                      Close
+                    </Button>
+                    <Button variant="ghost">Secondary Action</Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+              <ConfirmPopup 
+                content={<AiFillDelete />}
+                title='Caution' 
+                message='Are you sure you want to delete this tracking?' 
+                button1='Delete'
+                button2='Cancel'
+              />
+          </Flex>
           </chakra.span>
         </Flex>
 
