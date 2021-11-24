@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { InputGroup, Input, Button, Flex } from '@chakra-ui/react';
+import { 
+  InputGroup,
+  Input,
+  Button, 
+  Flex,
+  useColorModeValue,
+} from '@chakra-ui/react';
 
 const SearchBox = () => {
   const [value, setValue] = useState('');
@@ -17,6 +23,7 @@ const SearchBox = () => {
               value={value}
               onChange={handleChange}
               isFullWidth={true}
+              bg={useColorModeValue('white', 'gray.600')}
             />
             <Button colorScheme='blue' onClick={handleClick}> Search </Button>
         </InputGroup>
