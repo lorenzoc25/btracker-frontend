@@ -36,7 +36,7 @@ const deleteItem = async () =>{
 
 const Item = ({ item }: ItemProps) => {
   const statColor = getStatusColor(item.status);
-  const { location, timestamp } = item.history;
+  const { location, timestamp } = item.history[0];
   const date = new Date(timestamp);
   const dateStr = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate();
   return (
