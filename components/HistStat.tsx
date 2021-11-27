@@ -15,7 +15,6 @@ const HistStat = (hist : HistProp) => {
   const { status, location, timestamp, message } = hist.hist;
   const date = new Date(timestamp);
   const dateStr = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate();
-  console.log(status);
   return (
         <Flex
             my={0}

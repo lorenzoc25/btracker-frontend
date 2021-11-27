@@ -5,7 +5,7 @@ import SearchBox from '../components/SearchBox';
 import Nav from '../components/Nav';
 import ItemList from '../components/ItemList';
 
-import { PackageList } from './fakeData';
+import { PackageList } from '../public/fakeData';
 
 const Home: NextPage = () => {
 
