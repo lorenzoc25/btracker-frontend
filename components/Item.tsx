@@ -4,6 +4,8 @@ import {
   chakra, 
   Box,
   Flex, 
+  Link,
+  Stack,
   useColorModeValue,
   Accordion,
   AccordionItem,
@@ -14,6 +16,7 @@ import {
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
 import ConfirmPopup from './ConfirmPopup';
 import InputPopup from './InputPopup';
+import HistStat from './HistStat';
 interface ItemProps {
   item: Package;
 }
@@ -36,7 +39,8 @@ const deleteItem = async () =>{
 
 const Item = ({ item }: ItemProps) => {
   const statColor = getStatusColor(item.status);
-  const { location, timestamp } = item.history;
+  const { history } = item;
+  const { location, timestamp } = history[0];
   const date = new Date(timestamp);
   const dateStr = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate();
   return (
@@ -132,10 +136,16 @@ const Item = ({ item }: ItemProps) => {
                     </AccordionButton>
 
                   <AccordionPanel px={0} pb='1em'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                    commodo consequat.
+                    <Stack align='stretch'>
+                    {
+                      history.map(
+                        (hist, idx) => <HistStat key={idx} hist={hist} />,
+                      )
+                    }
+                    </Stack>
+                    <Flex justifyContent='center' mt='1em'>
+                      <Link color='blue.400' href='#'>View More</Link>
+                    </Flex>
                   </AccordionPanel>
                 </AccordionItem>
               </Accordion>

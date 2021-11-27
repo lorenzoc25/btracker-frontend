@@ -2,7 +2,7 @@ export interface History {
   status: string;
   location: string;
   timestamp: number;
-  
+  message : string;
 }
 export enum Status {
   LabelCreated = 'Label Created',
@@ -15,6 +15,6 @@ export interface Package {
   tracking: string;
   carrier: string;
   name: string;
-  history: History;
+  history: History[];
   status: Status;
 }
