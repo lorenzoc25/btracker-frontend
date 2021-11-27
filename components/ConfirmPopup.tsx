@@ -14,7 +14,6 @@ import {
 interface ActionFunction {
   () : void;
 }
-
 interface PopupProps {
   content : any;
   title : string;
@@ -30,10 +29,6 @@ const ConfirmPopup = ({ content, title, message, button1, button2, action } : Po
     action();
     onClose();
   };
-};
-
-const ConfirmPopup = ({ content, title, message, button1, button2 } : PopupProps) =>{
-  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
         <>
          <Button onClick={onOpen} background='none' p={0}>
@@ -53,7 +48,6 @@ const ConfirmPopup = ({ content, title, message, button1, button2 } : PopupProps
                       {button1}
                     </Button>
                     <Button variant="ghost" onClick={onClose}>{button2}</Button>
-
                   </ModalFooter>
                 </ModalContent>
               </Modal>

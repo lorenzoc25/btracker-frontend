@@ -22,7 +22,6 @@ const SearchBox = () => {
               placeholder='Enter a tracking number'
               value={value}
               onChange={handleChange}
-              isFullWidth={true}
               bg={useColorModeValue('white', 'gray.600')}
             />
             <Button colorScheme='blue' onClick={handleClick}> Search </Button>

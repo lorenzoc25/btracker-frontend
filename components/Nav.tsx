@@ -79,8 +79,7 @@ const Nav = ({ isLoggedIn } : NavProps) => {
       <>
         <Box bg={useColorModeValue('gray.200', 'gray.900')} px={4}>
           <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-            <Box>BTracker</Box>
-  
+            <Box>🔍   Btracker</Box>
             <Flex alignItems={'center'}>
               <Stack direction={'row'} spacing={7}>
                 <Button onClick={toggleColorMode}>
