@@ -2,8 +2,8 @@ export interface History {
   status: string;
   location: string;
   timestamp: number;
-}
   
+}
 export enum Status {
   LabelCreated = 'Label Created',
   InTransit = 'In Transit',

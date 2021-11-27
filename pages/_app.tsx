@@ -4,16 +4,23 @@ import {
   ChakraProvider,
   localStorageManager,
 } from '@chakra-ui/react';
-import { extendTheme, ThemeConfig } from '@chakra-ui/react';
-
+import { extendTheme  } from '@chakra-ui/react';
+import { mode } from '@chakra-ui/theme-tools';
 import { AppProvider } from '../context/context';
 
-const config : ThemeConfig = {
+const theme = extendTheme({
+  styles: {
+    global: (props : any) => ({
+      body: {
+        color: mode('gray.800', 'whiteAlpha.900')(props),
+        bg: mode('gray.50', 'gray.800')(props),
+        lineHeight: 'base',
+      },
+    }),
+  },
   initialColorMode: 'light',
   useSystemColorMode: true,
-};
-
-const theme = extendTheme({ config });
+});
 
 const App = ({
   Component,
@@ -32,3 +39,4 @@ const App = ({
 };
 
 export default App;
+

@@ -1,12 +1,31 @@
-import React from 'react';
-import { InputGroup, Input, Button, Flex } from '@chakra-ui/react';
-// import styles from '../styles/SearchBox.module.css';
+import React, { useState } from 'react';
+import { 
+  InputGroup,
+  Input,
+  Button, 
+  Flex,
+  useColorModeValue,
+} from '@chakra-ui/react';
 
 const SearchBox = () => {
-  return <Flex>
+  const [value, setValue] = useState('');
+  const handleChange = (event : React.ChangeEvent<HTMLInputElement> ) => setValue(event.target.value);
+  const handleClick = () =>{
+    console.log(value);
+  };
+  return <Flex width='100%' my='2em'>
         <InputGroup justifyContent={'center'}>
-            <Input rounded='lg' mx={3} width={'50%'} placeholder='Enter a tracking number' />
-            <Button colorScheme='blue'> Search </Button>
+            <Input 
+              rounded='lg'
+              mx={3} 
+              width='70%' 
+              placeholder='Enter a tracking number'
+              value={value}
+              onChange={handleChange}
+              isFullWidth={true}
+              bg={useColorModeValue('white', 'gray.600')}
+            />
+            <Button colorScheme='blue' onClick={handleClick}> Search </Button>
         </InputGroup>
         </Flex>;
 };

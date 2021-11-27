@@ -11,13 +11,26 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 
+interface ActionFunction {
+  () : void;
+}
+
 interface PopupProps {
   content : any;
   title : string;
   message : string;
   button1 : string;
   button2: string;
+  action: ActionFunction;
 }
+
+const ConfirmPopup = ({ content, title, message, button1, button2, action } : PopupProps) =>{
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const wrapOnClose = () =>{
+    action();
+    onClose();
+  };
+};
 
 const ConfirmPopup = ({ content, title, message, button1, button2 } : PopupProps) =>{
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -36,10 +49,11 @@ const ConfirmPopup = ({ content, title, message, button1, button2 } : PopupProps
                   </ModalBody>
 
                   <ModalFooter justifyContent='space-around'>
-                    <Button colorScheme="red" mr={3} onClick={onClose}>
+                    <Button colorScheme="red" mr={3} onClick={wrapOnClose}>
                       {button1}
                     </Button>
-                    <Button variant="ghost">{button2}</Button>
+                    <Button variant="ghost" onClick={onClose}>{button2}</Button>
+
                   </ModalFooter>
                 </ModalContent>
               </Modal>
