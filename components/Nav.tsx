@@ -1,4 +1,5 @@
 import {
+  chakra,
   Box,
   Flex,
   Avatar,
@@ -21,6 +22,9 @@ interface NavProps {
 
 const Nav = ({ isLoggedIn } : NavProps) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const textBgLight = useColorModeValue('blue', 'blue.100');
+  const textBgDark = useColorModeValue('blue.400', 'blue.300');
+
   const userButton = (<>
           <MenuButton
           as={Button}
@@ -53,21 +57,22 @@ const Nav = ({ isLoggedIn } : NavProps) => {
             direction={'row'}
             spacing={6}>
             <Button
-              as={'a'}
-              fontSize={'sm'}
+              as='a'
+              fontSize='sm'
               fontWeight={400}
-              variant={'link'}
-              href={'/login'}>
+              variant='link'
+              href='/login'
+              >
               Sign In
             </Button>
             <Button
-              as={'a'}
+              as='a'
               display={{ base: 'none', md: 'inline-flex' }}
-              fontSize={'sm'}
+              fontSize='sm'
               fontWeight={600}
-              color={'white'}
-              bg={'blue.400'}
-              href={'#'}
+              color='white'
+              bg='blue.400'
+              href='signup'
               _hover={{
                 bg: 'blue.300',
               }}>
@@ -79,7 +84,7 @@ const Nav = ({ isLoggedIn } : NavProps) => {
       <>
         <Box bg={useColorModeValue('gray.200', 'gray.900')} px={4}>
           <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-            <Box>🔍   Btracker</Box>
+            <Box> <chakra.p fontWeight='bold' bgGradient={`linear(to-l, ${textBgLight}, ${textBgDark})`} bgClip="text">Btracker</chakra.p></Box>
             <Flex alignItems={'center'}>
               <Stack direction={'row'} spacing={7}>
                 <Button onClick={toggleColorMode}>
