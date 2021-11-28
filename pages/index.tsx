@@ -11,7 +11,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-    <Nav isLoggedIn={true}/>
+    <Nav isLoggedIn={false}/>
     <div className={styles.container}>
       <Head>
         <title>BTracker</title>

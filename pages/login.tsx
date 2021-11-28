@@ -1,113 +1,57 @@
-/* eslint-disable react/no-children-prop */
-import React, { useState } from 'react';
-import type { NextPage } from 'next';
 import {
   Flex,
-  Heading,
-  Input,
-  Button,
-  InputGroup,
-  Stack,
-  InputLeftElement,
-  chakra,
   Box,
-  Link,
-  Avatar,
   FormControl,
-  FormHelperText,
-  InputRightElement,
+  FormLabel,
+  Input,
+  Stack,
+  Button,
+  Heading,
+  Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import { FaUserAlt, FaLock } from 'react-icons/fa';
 
-const CFaUserAlt = chakra(FaUserAlt);
-const CFaLock = chakra(FaLock);
-
-
-const Login : NextPage = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const handleShowClick = () => setShowPassword(!showPassword);
-  const bgColor = useColorModeValue('gray.200', 'gray.800');
-  const iconColor = useColorModeValue('gray.300', 'gray.100');
-  const boxColor = useColorModeValue('whiteAlpha.900', 'gray.700');
+export default function SimpleCard() {
   return (
     <Flex
-      flexDirection="column"
-      width="100wh"
-      height="100vh"
-      backgroundColor={bgColor}
-      justifyContent="center"
-      alignItems="center"
-    >
-      <Stack
-        flexDir="column"
-        mb="2"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Avatar bg="blue.500" />
-        <Heading color="blue.400">Welcome :)</Heading>
-        <Box minW={{ base: '90%', md: '468px' }}>
-          <form>
-            <Stack
-              spacing={4}
-              p="1rem"
-              backgroundColor={boxColor}
-              boxShadow="md"
-              borderRadius='0.5em'
-            >
-              <FormControl>
-                <InputGroup marginTop='0.5em'>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    children={<CFaUserAlt color={iconColor} />}
-                  />
-                  <Input type="email" placeholder="Email Address" />
-                </InputGroup>
-              </FormControl>
-              <FormControl>
-                <InputGroup>
-                  <InputLeftElement
-                    pointerEvents="none"
-                    color={iconColor}
-                    children={<CFaLock color={iconColor} />}
-                  />
-                  <Input
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Password"
-                  />
-                  <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleShowClick}>
-                      {showPassword ? 'Hide' : 'Show'}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-                <FormHelperText textAlign="right">
-                  <Link>forgot password?</Link>
-                </FormHelperText>
-              </FormControl>
-              <Button
-                borderRadius='0.5em'
-                type="submit"
-                variant="solid"
-                colorScheme="blue"
-                width="full"
-                marginBottom='1em'
-              >
-                Login
+      minH={'100vh'}
+      align={'center'}
+      justify={'center'}
+      bg={useColorModeValue('gray.50', 'gray.800')}>
+      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+        <Stack align={'center'}>
+          <Heading fontSize={'4xl'}>Sign in to your account</Heading>
+          <Text fontSize={'lg'} color={'gray.600'}>
+            to track all your valuable packages :)
+          </Text>
+        </Stack>
+        <Box
+          rounded={'lg'}
+          bg={useColorModeValue('white', 'gray.700')}
+          boxShadow={'lg'}
+          p={8}>
+          <Stack spacing={4} >
+            <FormControl id="email">
+              <FormLabel>Email address</FormLabel>
+              <Input type="email" />
+            </FormControl>
+            <FormControl id="password">
+              <FormLabel>Password</FormLabel>
+              <Input type="password" />
+            </FormControl>
+            <Stack spacing={10}>
+              <Button mt='1em'
+                bg={'blue.400'}
+                color={'white'}
+                _hover={{
+                  bg: 'blue.500',
+                }}>
+                Sign in
               </Button>
             </Stack>
-          </form>
+          </Stack>
         </Box>
       </Stack>
-      <Box>
-        New to us?{' '}
-        <Link color="blue.500" href="#">
-          Sign Up
-        </Link>
-      </Box>
     </Flex>
   );
-};
-
-export default Login;
+}
