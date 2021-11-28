@@ -46,7 +46,7 @@ const Item = ({ item }: ItemProps) => {
   return (
     <Flex
       py={2}
-      px={50}
+      px ={{ base: 0, md:35, lg: 50 }}
       w="full"
       alignItems="center"
       justifyContent="center"
