@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   chakra,
   Box,
@@ -166,7 +165,7 @@ const Item = ({ item, isExtended }: ItemProps) => {
                     }
                 </Stack>
                 <Flex justifyContent="center" mt="1em">
-                  <Link color="blue.400" href="#">View More</Link>
+                  <Link color="blue.400" href={`/${item.tracking}`}>View More</Link>
                 </Flex>
               </AccordionPanel>
             </AccordionItem>

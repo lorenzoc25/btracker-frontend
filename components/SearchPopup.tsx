@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {
   Button,
   Input,
@@ -13,17 +13,22 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 import { Search2Icon } from '@chakra-ui/icons';
-import ItemList from './ItemList';
-import { PackageList } from '../public/fakeData';
+
+import { AppContext } from '../context/context';
+import PackageList from './PackageList';
 
 const SearchPopup = () => {
+  const { state } = useContext(AppContext);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = useState('');
-  const [matchedPackage, setMatchedPackge] = useState(PackageList);
+  const [matchedPackage, setMatchedPackge] = useState(state.packageList);
   const searchPackage = (key : string) : void => {
     const searchKey = key.toLowerCase();
-    const mathced = PackageList.filter(
-      (item) => item.name.toLowerCase().includes(searchKey) || item.tracking.includes(searchKey),
+    const mathced = state.packageList.filter(
+      (packageInfo) => (
+        packageInfo.name.toLowerCase().includes(searchKey)
+        || packageInfo.tracking.includes(searchKey)
+      ),
     );
     setMatchedPackge(mathced);
   };
@@ -36,7 +41,7 @@ const SearchPopup = () => {
 
   const wrapOnClose = () => {
     setValue('');
-    setMatchedPackge(PackageList);
+    setMatchedPackge(state.packageList);
     onClose();
   };
 
@@ -61,7 +66,7 @@ const SearchPopup = () => {
               />
             </InputGroup>
           </ModalBody>
-          <ItemList items={matchedPackage} isExtended={false} />
+          <PackageList items={matchedPackage} isExtended={false} />
           <ModalFooter justifyContent="space-around">
             <Button colorScheme="blue" mr={3} onClick={wrapOnClose}>
               Done

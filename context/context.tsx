@@ -14,6 +14,7 @@ const initialState: State = {
   token: '',
   username: '',
   email: '',
+  packageList: [],
 };
 
 const AppContext = createContext<{
@@ -42,6 +43,7 @@ const AppProvider: FC = ({ children }) => {
         username: parsedState.username,
         email: parsedState.email,
         token: parsedState.token,
+        packageList: parsedState.packageList,
       },
     });
   }, []);
