@@ -14,6 +14,7 @@ import {
   useColorMode,
   Center,
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 interface NavProps {
@@ -61,29 +62,33 @@ const Nav = ({ isLoggedIn } : NavProps) => {
       direction="row"
       spacing={6}
     >
-      <Button
-        as="a"
-        fontSize="sm"
-        fontWeight={400}
-        variant="link"
+      <Link
         href="/login"
       >
-        Sign In
-      </Button>
-      <Button
-        as="a"
-        display={{ base: 'none', md: 'inline-flex' }}
-        fontSize="sm"
-        fontWeight={600}
-        color="white"
-        bg="blue.400"
-        href="signup"
-        _hover={{
-          bg: 'blue.300',
-        }}
+        <Button
+          fontSize="sm"
+          fontWeight={400}
+        >
+          Sign In
+        </Button>
+      </Link>
+
+      <Link
+        href="/signup"
       >
-        Sign Up
-      </Button>
+        <Button
+          display={{ base: 'none', md: 'inline-flex' }}
+          fontSize="sm"
+          fontWeight={600}
+          color="white"
+          bg="blue.400"
+          _hover={{
+            bg: 'blue.300',
+          }}
+        >
+          Sign Up
+        </Button>
+      </Link>
     </Stack>
   );
   return (

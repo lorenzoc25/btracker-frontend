@@ -1,4 +1,3 @@
-import '../styles/globals.css';
 import { AppProps } from 'next/app';
 import {
   ChakraProvider,
@@ -10,8 +9,9 @@ import { AppProvider } from '../context/context';
 
 const theme = extendTheme({
   styles: {
-    global: (props : any) => ({
-      body: {
+    global: (props: any) => ({
+      'html body': {
+        height: '100%',
         color: mode('gray.800', 'whiteAlpha.900')(props),
         bg: mode('gray.50', 'gray.800')(props),
         lineHeight: 'base',

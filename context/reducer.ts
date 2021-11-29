@@ -1,14 +1,17 @@
 import { Action, State } from '../types/context';
 
-export const reducer = (
+const reducer = (
   state: State,
   action: Action,
 ) => {
   switch (action.type) {
-    case 'ADD':
+    case 'SetToken':
+      state.token = action.payload.token;
       break;
 
     default:
       break;
   }
 };
+
+export default reducer;
