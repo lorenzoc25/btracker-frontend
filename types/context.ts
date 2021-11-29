@@ -1,16 +1,13 @@
-export interface State {}
-
-interface AddAction {
-  type: 'ADD';
+export interface State {
+  token?: string;
 }
 
-interface DeleteAction {
-  type: 'ADD';
+interface SetTokenAction {
+  type: 'SetToken';
   payload: {
-    id: string;
+    token: string;
   };
 }
 
 export type Action =
- | AddAction
- | DeleteAction;
+ | SetTokenAction;

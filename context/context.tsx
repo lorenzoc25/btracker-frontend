@@ -6,7 +6,7 @@ import {
 } from 'react';
 import { useImmerReducer } from 'use-immer';
 
-import { reducer } from './reducer';
+import reducer from './reducer';
 import { State, Action } from '../types/context';
 
 const initialState: State = {};

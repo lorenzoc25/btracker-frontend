@@ -1,7 +1,6 @@
-import type { NextPage } from 'next';
+import { NextPage } from 'next';
 import Head from 'next/head';
 import { Box, Text, useColorModeValue } from '@chakra-ui/react';
-import styles from '../styles/Home.module.css';
 import SearchBox from '../components/SearchBox';
 import Nav from '../components/Nav';
 import ItemList from '../components/ItemList';
@@ -12,14 +11,12 @@ const Home: NextPage = () => {
   const textColor = useColorModeValue('gray.500', 'gray.50');
   return (
     <>
-      <Nav isLoggedIn={false} />
-      <div className={styles.container}>
-        <Head>
-          <title>BTracker</title>
-          <meta name="description" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
+      <Head>
+        <title>BTracker</title>
+      </Head>
 
+      <Nav isLoggedIn={false} />
+      <div>
         <main>
           <SearchBox />
         </main>

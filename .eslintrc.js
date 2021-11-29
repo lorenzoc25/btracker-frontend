@@ -24,10 +24,11 @@ module.exports = {
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react/function-component-definition': [
-      2,
+      'error',
       {
         namedComponents: 'arrow-function',
       },
     ],
+    'no-param-reassign': 'off'
   },
 };
