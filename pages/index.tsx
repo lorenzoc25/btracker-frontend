@@ -7,6 +7,7 @@ import Nav from '../components/Nav';
 import ItemList from '../components/ItemList';
 import { AppContext } from '../context/context';
 import { PackageList } from '../public/fakeData';
+import { AppContext } from '../context/context';
 
 const Home: NextPage = () => {
   const { state } = useContext(AppContext);

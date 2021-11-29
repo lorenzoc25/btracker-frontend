@@ -1,5 +1,7 @@
 export interface State {
-  token?: string;
+  token: string;
+  username: string;
+  email: string;
 }
 
 interface SetTokenAction {
@@ -9,5 +11,21 @@ interface SetTokenAction {
   };
 }
 
+interface SetUsernameAction {
+  type: 'SetUsername';
+  payload: {
+    username: string;
+  };
+}
+
+interface SetEmailAction {
+  type: 'SetEmail';
+  payload: {
+    email: string;
+  };
+}
+
 export type Action =
- | SetTokenAction;
+ | SetTokenAction
+ | SetUsernameAction
+ | SetEmailAction;

@@ -9,7 +9,11 @@ import { useImmerReducer } from 'use-immer';
 import reducer from './reducer';
 import { State, Action } from '../types/context';
 
-const initialState: State = {};
+const initialState: State = {
+  token: '',
+  username: '',
+  email: '',
+};
 
 const AppContext = createContext<{
   state: State;
