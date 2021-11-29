@@ -11,7 +11,7 @@ export enum Status {
   OutOfDelivery = 'Out of Delivery',
   Delivered = 'Delivered',
 }
-  
+
 export interface Package {
   tracking: string;
   carrier: string;

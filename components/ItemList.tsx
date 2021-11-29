@@ -6,14 +6,14 @@ interface ItemListProp {
   items : Package[];
 }
 
-const ItemList = ( { items } : ItemListProp ) =>{
-  return (<>
+const ItemList = ({ items } : ItemListProp) => (
+  <>
     {
       items.map(
-        (item, idx) => <Item key={idx} item={item} />,
+        (item) => <Item key={item.tracking} item={item} />,
       )
     }
-  </>);
-};
+  </>
+);
 
 export default ItemList;
