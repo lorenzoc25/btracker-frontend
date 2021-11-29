@@ -51,6 +51,8 @@ const SearchBox = () => {
           package: response.data,
         },
       });
+
+      setTracking('');
     } catch (error) {
       if (axios.isAxiosError(error)) {
         toast({
