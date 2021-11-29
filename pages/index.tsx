@@ -46,7 +46,7 @@ const Home: NextPage = () => {
         dispatch({
           type: 'SetPackageList',
           payload: {
-            packageList: response.data.packageList,
+            packageList: response.data.packageList === undefined ? [] : response.data.packageList,
           },
         });
       } catch (error) {

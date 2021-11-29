@@ -22,9 +22,10 @@ const SearchBox = () => {
   ) => setTracking(event.target.value);
 
   const handleClick = async () => {
-    if (state.packageList.some(
-      (item) => item.tracking === tracking,
-    )) {
+    if (state.packageList !== undefined
+      && state.packageList.some(
+        (item) => item.tracking === tracking,
+      )) {
       toast({
         title: 'The package exists in the package list',
         status: 'info',
