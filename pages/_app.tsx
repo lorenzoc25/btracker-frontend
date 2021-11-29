@@ -3,8 +3,8 @@ import { AppProps } from 'next/app';
 import {
   ChakraProvider,
   localStorageManager,
+  extendTheme,
 } from '@chakra-ui/react';
-import { extendTheme  } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 import { AppProvider } from '../context/context';
 
@@ -25,18 +25,15 @@ const theme = extendTheme({
 const App = ({
   Component,
   pageProps,
-}: AppProps) => {
-  return (
-    <ChakraProvider
-      colorModeManager={localStorageManager}
-      theme={theme}
-    >
-      <AppProvider>
-        <Component {...pageProps} />
-      </AppProvider>
-    </ChakraProvider>
-  );
-};
+}: AppProps) => (
+  <ChakraProvider
+    colorModeManager={localStorageManager}
+    theme={theme}
+  >
+    <AppProvider>
+      <Component {...pageProps} />
+    </AppProvider>
+  </ChakraProvider>
+);
 
 export default App;
-

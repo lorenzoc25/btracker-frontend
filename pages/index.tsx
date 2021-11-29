@@ -12,25 +12,27 @@ const Home: NextPage = () => {
   const textColor = useColorModeValue('gray.500', 'gray.50');
   return (
     <>
-    <Nav isLoggedIn={false}/>
-    <div className={styles.container}>
-      <Head>
-        <title>BTracker</title>
-        <meta name="description" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <Nav isLoggedIn={false} />
+      <div className={styles.container}>
+        <Head>
+          <title>BTracker</title>
+          <meta name="description" />
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <main>
-      <SearchBox />
-      </main>
-      {
-        PackageList.length > 0 ? 
-        <ItemList items={PackageList}/> : 
-        <Box textAlign='center' mt='2em'>
-          <Text fontSize='2xl' color={textColor}>You don&#39;t have any packages right now. Try to add one from above!</Text>
-        </Box>
+        <main>
+          <SearchBox />
+        </main>
+        {
+        PackageList.length > 0
+          ? <ItemList items={PackageList} />
+          : (
+            <Box textAlign="center" mt="2em">
+              <Text fontSize="2xl" color={textColor}>You don&#39;t have any packages right now. Try to add one from above!</Text>
+            </Box>
+          )
       }
-    </div>
+      </div>
     </>
   );
 };

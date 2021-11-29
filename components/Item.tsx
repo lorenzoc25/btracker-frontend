@@ -1,9 +1,8 @@
 import React from 'react';
-import { Package, Status } from '../types/package';
-import { 
-  chakra, 
+import {
+  chakra,
   Box,
-  Flex, 
+  Flex,
   Link,
   Stack,
   useColorModeValue,
@@ -14,26 +13,27 @@ import {
   AccordionIcon,
 } from '@chakra-ui/react';
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
+import { Package, Status } from '../types/package';
 import ConfirmPopup from './ConfirmPopup';
 import InputPopup from './InputPopup';
 import HistStat from './HistStat';
+
 interface ItemProps {
   item: Package;
 }
 
-const getStatusColor = (status: Status ): string[] =>  {
+const getStatusColor = (status: Status): string[] => {
   if (status === Status.Delivered) {
     return ['green.600', 'green.200'];
-  } else if (status === Status.OutOfDelivery) {
+  } if (status === Status.OutOfDelivery) {
     return ['orange.400', 'orange.300'];
-  } else if (status === Status.InTransit) {
+  } if (status === Status.InTransit) {
     return ['cyan.800', 'cyan.200'];
-  } else {
-    return ['red.500', 'red.400'];
   }
+  return ['red.500', 'red.400'];
 };
 
-const deleteItem = async () =>{
+const deleteItem = async () => {
   console.log('deleted item!');
 };
 
@@ -42,11 +42,11 @@ const Item = ({ item }: ItemProps) => {
   const { history } = item;
   const { location, timestamp } = history[0];
   const date = new Date(timestamp);
-  const dateStr = date.getFullYear() + '/' + date.getMonth() + '/' + date.getDate();
+  const dateStr = `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`;
   return (
     <Flex
       py={2}
-      px ={{ base: 0, md:35, lg: 50 }}
+      px={{ base: 0, md: 35, lg: 50 }}
       w="full"
       alignItems="center"
       justifyContent="center"
@@ -65,7 +65,10 @@ const Item = ({ item }: ItemProps) => {
             fontSize="sm"
             color={useColorModeValue('gray.800', 'gray.400')}
           >
-            {item.carrier} - {item.tracking}
+            {item.carrier}
+            {' '}
+            -
+            {item.tracking}
           </chakra.span>
           <chakra.span
             bg={useColorModeValue('brand.200', 'brand.300')}
@@ -74,21 +77,21 @@ const Item = ({ item }: ItemProps) => {
             py={1}
             rounded="full"
           >
-          <Flex >
-              <InputPopup 
-                title='Change Name'
-                content={<AiOutlineEdit/>}
-                placeholder='Enter a new name'
+            <Flex>
+              <InputPopup
+                title="Change Name"
+                content={<AiOutlineEdit />}
+                placeholder="Enter a new name"
               />
-              <ConfirmPopup 
-                content={<AiFillDelete/>}
-                title='Caution' 
-                message='Are you sure you want to delete this tracking?' 
-                button1='Delete'
-                button2='Cancel'
+              <ConfirmPopup
+                content={<AiFillDelete />}
+                title="Caution"
+                message="Are you sure you want to delete this tracking?"
+                button1="Delete"
+                button2="Cancel"
                 action={deleteItem}
               />
-          </Flex>
+            </Flex>
           </chakra.span>
         </Flex>
 
@@ -105,8 +108,7 @@ const Item = ({ item }: ItemProps) => {
             fontSize="sm"
             mt={2}
             color={useColorModeValue('gray.600', 'gray.300')}
-          > 
-          </chakra.p>
+          />
         </Box>
 
         <Box>
@@ -116,39 +118,45 @@ const Item = ({ item }: ItemProps) => {
             color={useColorModeValue('gray.700', 'gray.200')}
           >
             <chakra.p
-                fontWeight="light">
-                Status:    
+              fontWeight="light"
+            >
+              Status:
             </chakra.p>
             <chakra.p
-                fontWeight="semibold"
-                color={useColorModeValue(statColor[0], statColor[1])}
+              fontWeight="semibold"
+              color={useColorModeValue(statColor[0], statColor[1])}
             >
-                {item.status}
+              {item.status}
             </chakra.p>
           </Flex>
           <Flex>
-              Package was last seen at {location} on {dateStr}
+            Package was last seen at
+            {' '}
+            {location}
+            {' '}
+            on
+            {dateStr}
           </Flex>
-              <Accordion allowToggle>
-                <AccordionItem border='hidden'>
-                    <AccordionButton mr={2} _hover={{ color: useColorModeValue('gray.700', 'gray.300') } } _focus={ { boxShadow: 'none' } } textAlign="center" padding={0}>  
-                      <AccordionIcon marginX='auto' />   
-                    </AccordionButton>
+          <Accordion allowToggle>
+            <AccordionItem border="hidden">
+              <AccordionButton mr={2} _hover={{ color: useColorModeValue('gray.700', 'gray.300') }} _focus={{ boxShadow: 'none' }} textAlign="center" padding={0}>
+                <AccordionIcon marginX="auto" />
+              </AccordionButton>
 
-                  <AccordionPanel px={0} pb='1em'>
-                    <Stack align='stretch'>
-                    {
+              <AccordionPanel px={0} pb="1em">
+                <Stack align="stretch">
+                  {
                       history.map(
-                        (hist, idx) => <HistStat key={idx} hist={hist} />,
+                        (hist) => <HistStat key={hist.timestamp} hist={hist} />,
                       )
                     }
-                    </Stack>
-                    <Flex justifyContent='center' mt='1em'>
-                      <Link color='blue.400' href='#'>View More</Link>
-                    </Flex>
-                  </AccordionPanel>
-                </AccordionItem>
-              </Accordion>
+                </Stack>
+                <Flex justifyContent="center" mt="1em">
+                  <Link color="blue.400" href="#">View More</Link>
+                </Flex>
+              </AccordionPanel>
+            </AccordionItem>
+          </Accordion>
         </Box>
       </Box>
     </Flex>

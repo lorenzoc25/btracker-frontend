@@ -7,7 +7,7 @@ export const reducer = (
   switch (action.type) {
     case 'ADD':
       break;
-    
+
     default:
       break;
   }

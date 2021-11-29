@@ -23,35 +23,42 @@ interface PopupProps {
   action: ActionFunction;
 }
 
-const ConfirmPopup = ({ content, title, message, button1, button2, action } : PopupProps) =>{
+const ConfirmPopup = ({
+  content,
+  title,
+  message,
+  button1,
+  button2,
+  action,
+} : PopupProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const wrapOnClose = () =>{
+  const wrapOnClose = () => {
     action();
     onClose();
   };
   return (
-        <>
-         <Button onClick={onOpen} background='none' p={0}>
-              {content}
-            </Button>
-              <Modal isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent>
-                  <ModalHeader textAlign='center'>{title}</ModalHeader>
-                  <ModalCloseButton />
-                  <ModalBody>
-                    {message}
-                  </ModalBody>
+    <>
+      <Button onClick={onOpen} background="none" p={0}>
+        {content}
+      </Button>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader textAlign="center">{title}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {message}
+          </ModalBody>
 
-                  <ModalFooter justifyContent='space-around'>
-                    <Button colorScheme="red" mr={3} onClick={wrapOnClose}>
-                      {button1}
-                    </Button>
-                    <Button variant="ghost" onClick={onClose}>{button2}</Button>
-                  </ModalFooter>
-                </ModalContent>
-              </Modal>
-        </>
+          <ModalFooter justifyContent="space-around">
+            <Button colorScheme="red" mr={3} onClick={wrapOnClose}>
+              {button1}
+            </Button>
+            <Button variant="ghost" onClick={onClose}>{button2}</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
 

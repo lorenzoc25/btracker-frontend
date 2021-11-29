@@ -1,4 +1,5 @@
 import {
+  useMemo,
   createContext,
   Dispatch,
   FC,
@@ -23,9 +24,14 @@ const AppProvider: FC = ({ children }) => {
     reducer,
     initialState,
   );
+  const context = useMemo(() => ({
+    state,
+    dispatch,
+  }), [state]);
+
   return (
     <AppContext.Provider
-      value={{ state, dispatch }}
+      value={context}
     >
       {children}
     </AppContext.Provider>
