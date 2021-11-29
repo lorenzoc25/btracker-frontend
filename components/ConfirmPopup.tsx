@@ -11,16 +11,13 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 
-interface ActionFunction {
-  () : void;
-}
 interface PopupProps {
-  content : any;
-  title : string;
-  message : string;
-  button1 : string;
+  content: JSX.Element;
+  title: string;
+  message: string;
+  button1: string;
   button2: string;
-  action: ActionFunction;
+  action: () => void;
 }
 
 const ConfirmPopup = ({
@@ -30,7 +27,7 @@ const ConfirmPopup = ({
   button1,
   button2,
   action,
-} : PopupProps) => {
+}: PopupProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const wrapOnClose = () => {
     action();

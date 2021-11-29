@@ -16,6 +16,26 @@ const reducer = (
       state.packageList = action.payload.packageList;
       break;
 
+    case 'AddPackage':
+      state.packageList.unshift(action.payload.package);
+      break;
+
+    case 'UpdatePackage':
+      state.packageList.filter(
+        (item) => item.tracking === action.payload.tracking,
+      ).forEach(
+        (item) => {
+          item.name = action.payload.name;
+        },
+      );
+      break;
+
+    case 'DeletePackage':
+      state.packageList = state.packageList.filter(
+        (item) => item.tracking !== action.payload.tracking,
+      );
+      break;
+
     case 'SetToken':
       state.token = action.payload.token;
       break;

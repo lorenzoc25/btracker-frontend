@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, ChangeEvent } from 'react';
 import {
   Button,
   Input,
@@ -19,12 +19,15 @@ import PackageList from './PackageList';
 
 const SearchPopup = () => {
   const { state } = useContext(AppContext);
+  const { packageList } = state;
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = useState('');
-  const [matchedPackage, setMatchedPackge] = useState(state.packageList);
-  const searchPackage = (key : string) : void => {
-    const searchKey = key.toLowerCase();
-    const mathced = state.packageList.filter(
+  const [matchedPackage, setMatchedPackge] = useState(packageList);
+
+  const searchPackage = () => {
+    const searchKey = value.toLowerCase();
+    const mathced = packageList.filter(
       (packageInfo) => (
         packageInfo.name.toLowerCase().includes(searchKey)
         || packageInfo.tracking.includes(searchKey)
@@ -32,16 +35,21 @@ const SearchPopup = () => {
     );
     setMatchedPackge(mathced);
   };
+
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement>,
   ) => {
     setValue(event.target.value);
-    searchPackage(value);
+    if (event.target.value === '') {
+      setMatchedPackge(packageList);
+      return;
+    }
+    searchPackage();
   };
 
   const wrapOnClose = () => {
     setValue('');
-    setMatchedPackge(state.packageList);
+    setMatchedPackge(packageList);
     onClose();
   };
 
@@ -60,7 +68,7 @@ const SearchPopup = () => {
               <Input
                 rounded="lg"
                 mx={3}
-                placeholder="Enter name/tracking number of your package: "
+                placeholder="Enter name/tracking number of your package"
                 value={value}
                 onChange={handleChange}
               />

@@ -1,3 +1,5 @@
+import axios from 'axios';
+import { useState, useContext, ChangeEvent } from 'react';
 import {
   chakra,
   Box,
@@ -5,6 +7,7 @@ import {
   Link,
   Stack,
   useColorModeValue,
+  useToast,
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -12,14 +15,24 @@ import {
   AccordionIcon,
 } from '@chakra-ui/react';
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
-import { Package, Status } from '../types/package';
+
 import ConfirmPopup from './ConfirmPopup';
 import InputPopup from './InputPopup';
 import HistStat from './HistStat';
+import { AppContext } from '../context/context';
+import { Package as PackageType, Status } from '../types/package';
 
-interface ItemProps {
-  item: Package;
+interface PackageProps {
+  item: PackageType;
   isExtended: boolean;
+}
+
+interface PackageDeleteResponse {
+  deletedCount: number;
+}
+
+interface PackageUpdateResponse {
+
 }
 
 const getStatusColor = (status: Status): string[] => {
@@ -28,21 +41,94 @@ const getStatusColor = (status: Status): string[] => {
   } if (status === Status.OutOfDelivery) {
     return ['orange.400', 'orange.300'];
   } if (status === Status.InTransit) {
-    return ['cyan.800', 'cyan.200'];
+    return ['cyan.600', 'cyan.200'];
   }
   return ['red.500', 'red.400'];
 };
 
-const deleteItem = async () => {
-  console.log('deleted item!');
-};
-
-const Item = ({ item, isExtended }: ItemProps) => {
+const Package = ({ item, isExtended }: PackageProps) => {
+  const toast = useToast();
+  const { state, dispatch } = useContext(AppContext);
+  const [inputValue, setInputValue] = useState('');
   const statColor = getStatusColor(item.status);
   const { history } = item;
   const { location, timestamp } = history[0];
   const date = new Date(timestamp);
-  const dateStr = `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`;
+  const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+
+  const handleInputChange = (
+    event: ChangeEvent<HTMLInputElement>,
+  ) => setInputValue(event.target.value);
+
+  const handleDeletePackage = async () => {
+    try {
+      const response = await axios.delete<PackageDeleteResponse>(
+        `http://localhost:4000/tracking/${item.tracking}`,
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        },
+      );
+      if (response.data.deletedCount > 0) {
+        dispatch({
+          type: 'DeletePackage',
+          payload: {
+            tracking: item.tracking,
+          },
+        });
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast({
+          title: 'Failed to delete the package',
+          description: error.response?.data?.message || '',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        throw error;
+      }
+    }
+  };
+
+  const handleUpdatePackage = async () => {
+    try {
+      await axios.put<PackageUpdateResponse>(
+        `http://localhost:4000/tracking/${item.tracking}`,
+        {
+          tracking: item.tracking,
+          name: inputValue,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${state.token}`,
+          },
+        },
+      );
+      dispatch({
+        type: 'UpdatePackage',
+        payload: {
+          tracking: item.tracking,
+          name: inputValue,
+        },
+      });
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        toast({
+          title: 'Failed to update the name of the package',
+          description: error.response?.data?.message || '',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      } else {
+        throw error;
+      }
+    }
+  };
+
   return (
     <Flex
       py={2}
@@ -83,6 +169,9 @@ const Item = ({ item, isExtended }: ItemProps) => {
                   title="Change Name"
                   content={<AiOutlineEdit />}
                   placeholder="Enter a new name"
+                  action={handleUpdatePackage}
+                  value={inputValue}
+                  handleInputChange={handleInputChange}
                 />
                 <ConfirmPopup
                   content={<AiFillDelete />}
@@ -90,7 +179,7 @@ const Item = ({ item, isExtended }: ItemProps) => {
                   message="Are you sure you want to delete this tracking?"
                   button1="Delete"
                   button2="Cancel"
-                  action={deleteItem}
+                  action={handleDeletePackage}
                 />
               </Flex>
             </chakra.span>
@@ -123,6 +212,7 @@ const Item = ({ item, isExtended }: ItemProps) => {
               fontWeight="light"
             >
               Status:
+              {' '}
             </chakra.p>
             <chakra.p
               fontWeight="semibold"
@@ -177,4 +267,4 @@ const Item = ({ item, isExtended }: ItemProps) => {
   );
 };
 
-export default Item;
+export default Package;
