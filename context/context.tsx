@@ -1,5 +1,6 @@
 import {
   useMemo,
+  useEffect,
   createContext,
   Dispatch,
   FC,
@@ -24,10 +25,29 @@ const AppContext = createContext<{
 });
 
 const AppProvider: FC = ({ children }) => {
+  const initializeState = (
+    initialValue = initialState,
+  ): State => {
+    if (typeof window === 'undefined') {
+      return initialState;
+    }
+    const localState = localStorage.getItem('state');
+    if (localState === null) {
+      return initialValue;
+    }
+    return JSON.parse(localState);
+  };
+
   const [state, dispatch] = useImmerReducer(
     reducer,
     initialState,
+    initializeState,
   );
+
+  useEffect(() => {
+    localStorage.setItem('state', JSON.stringify(state));
+  }, [state]);
+
   const context = useMemo(() => ({
     state,
     dispatch,
