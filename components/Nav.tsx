@@ -1,7 +1,4 @@
 import {
-  useContext,
-} from 'react';
-import {
   chakra,
   Box,
   Flex,
@@ -17,9 +14,10 @@ import {
   useColorMode,
   Center,
 } from '@chakra-ui/react';
-import Link from 'next/link';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-
+import Link from 'next/link';
+import { useContext } from 'react';
+import SearchPopup from './SearchPopup';
 import { AppContext } from '../context/context';
 
 interface NavProps {
@@ -28,6 +26,7 @@ interface NavProps {
 
 const Nav = ({ isLoggedIn } : NavProps) => {
   const { state, dispatch } = useContext(AppContext);
+
   const { colorMode, toggleColorMode } = useColorMode();
   const textBgLight = useColorModeValue('blue', 'blue.100');
   const textBgDark = useColorModeValue('blue.400', 'blue.300');
@@ -39,8 +38,10 @@ const Nav = ({ isLoggedIn } : NavProps) => {
       },
     });
   };
+
   const UserButton = (
     <>
+      <SearchPopup />
       <MenuButton
         as={Button}
         cursor="pointer"

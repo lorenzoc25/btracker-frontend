@@ -20,6 +20,7 @@ import HistStat from './HistStat';
 
 interface ItemProps {
   item: Package;
+  isExtended: boolean;
 }
 
 const getStatusColor = (status: Status): string[] => {
@@ -37,7 +38,7 @@ const deleteItem = async () => {
   console.log('deleted item!');
 };
 
-const Item = ({ item }: ItemProps) => {
+const Item = ({ item, isExtended }: ItemProps) => {
   const statColor = getStatusColor(item.status);
   const { history } = item;
   const { location, timestamp } = history[0];
@@ -70,29 +71,31 @@ const Item = ({ item }: ItemProps) => {
             -
             {item.tracking}
           </chakra.span>
-          <chakra.span
-            bg={useColorModeValue('brand.200', 'brand.300')}
-            color={useColorModeValue('brand.800', 'brand.900')}
-            px={3}
-            py={1}
-            rounded="full"
-          >
-            <Flex>
-              <InputPopup
-                title="Change Name"
-                content={<AiOutlineEdit />}
-                placeholder="Enter a new name"
-              />
-              <ConfirmPopup
-                content={<AiFillDelete />}
-                title="Caution"
-                message="Are you sure you want to delete this tracking?"
-                button1="Delete"
-                button2="Cancel"
-                action={deleteItem}
-              />
-            </Flex>
-          </chakra.span>
+          {isExtended && (
+            <chakra.span
+              bg={useColorModeValue('brand.200', 'brand.300')}
+              color={useColorModeValue('brand.800', 'brand.900')}
+              px={3}
+              py={1}
+              rounded="full"
+            >
+              <Flex>
+                <InputPopup
+                  title="Change Name"
+                  content={<AiOutlineEdit />}
+                  placeholder="Enter a new name"
+                />
+                <ConfirmPopup
+                  content={<AiFillDelete />}
+                  title="Caution"
+                  message="Are you sure you want to delete this tracking?"
+                  button1="Delete"
+                  button2="Cancel"
+                  action={deleteItem}
+                />
+              </Flex>
+            </chakra.span>
+          )}
         </Flex>
 
         <Box>
@@ -129,14 +132,25 @@ const Item = ({ item }: ItemProps) => {
               {item.status}
             </chakra.p>
           </Flex>
-          <Flex>
-            Package was last seen at
-            {' '}
-            {location}
-            {' '}
-            on
-            {dateStr}
-          </Flex>
+          {isExtended ? (
+            <Flex>
+              Package was last seen at
+              {' '}
+              {location}
+              {' '}
+              on
+              {' '}
+              {dateStr}
+            </Flex>
+          )
+            : (
+              <Flex justifyContent="center">
+                <Link color="blue.400" href={`/${item.tracking}`}>
+                  View Detail
+                </Link>
+              </Flex>
+            )}
+          {isExtended && (
           <Accordion allowToggle>
             <AccordionItem border="hidden">
               <AccordionButton mr={2} _hover={{ color: useColorModeValue('gray.700', 'gray.300') }} _focus={{ boxShadow: 'none' }} textAlign="center" padding={0}>
@@ -157,6 +171,7 @@ const Item = ({ item }: ItemProps) => {
               </AccordionPanel>
             </AccordionItem>
           </Accordion>
+          ) }
         </Box>
       </Box>
     </Flex>

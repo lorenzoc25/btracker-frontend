@@ -5,7 +5,6 @@ import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 import SearchBox from '../components/SearchBox';
 import Nav from '../components/Nav';
 import ItemList from '../components/ItemList';
-
 import { PackageList } from '../public/fakeData';
 import { AppContext } from '../context/context';
 
@@ -25,7 +24,7 @@ const Home: NextPage = () => {
         </main>
         {
         PackageList.length > 0
-          ? <ItemList items={PackageList} />
+          ? <ItemList items={PackageList} isExtended />
           : (
             <Box textAlign="center" mt="2em">
               <Text fontSize="2xl" color={textColor}>You don&#39;t have any packages right now. Try to add one from above!</Text>
