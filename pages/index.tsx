@@ -20,10 +20,6 @@ import ItemList from '../components/PackageList';
 import { AppContext } from '../context/context';
 import { Package } from '../types/package';
 
-interface PackageListResponse {
-  packageList: Package[];
-}
-
 const Home: NextPage = () => {
   const { state, dispatch } = useContext(AppContext);
   const [loading, setLoading] = useState(true);
@@ -34,7 +30,7 @@ const Home: NextPage = () => {
     const fetchPackageList = async () => {
       setLoading(true);
       try {
-        const response = await axios.get<PackageListResponse>(
+        const response = await axios.get<Package[]>(
           'http://localhost:4000/user/tracking',
           {
             headers: {
@@ -46,7 +42,7 @@ const Home: NextPage = () => {
         dispatch({
           type: 'SetPackageList',
           payload: {
-            packageList: response.data.packageList === undefined ? [] : response.data.packageList,
+            packageList: response.data || [],
           },
         });
       } catch (error) {
