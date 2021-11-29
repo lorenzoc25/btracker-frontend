@@ -5,7 +5,8 @@ import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 import SearchBox from '../components/SearchBox';
 import Nav from '../components/Nav';
 import ItemList from '../components/ItemList';
-
+import { useContext } from 'react';
+import { AppContext } from '../context/context';
 import { PackageList } from '../public/fakeData';
 import { AppContext } from '../context/context';
 
