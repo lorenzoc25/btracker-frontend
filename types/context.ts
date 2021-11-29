@@ -4,6 +4,15 @@ export interface State {
   email: string;
 }
 
+interface SetState {
+  type: 'SetState';
+  payload: {
+    username: string;
+    email: string;
+    token: string;
+  };
+}
+
 interface SetTokenAction {
   type: 'SetToken';
   payload: {
@@ -26,6 +35,7 @@ interface SetEmailAction {
 }
 
 export type Action =
- | SetTokenAction
- | SetUsernameAction
- | SetEmailAction;
+  | SetState
+  | SetTokenAction
+  | SetUsernameAction
+  | SetEmailAction;

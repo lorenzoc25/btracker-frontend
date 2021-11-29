@@ -44,15 +44,11 @@ const Nav = ({ isLoggedIn } : NavProps) => {
       <SearchPopup />
       <MenuButton
         as={Button}
-        cursor="pointer"
-        minW={0}
-        leftIcon={(
-          <Avatar
-            size="sm"
-          />
-        )}
+        background="transparent"
       >
-        { state.username }
+        <Avatar
+          size="sm"
+        />
       </MenuButton>
 
       <MenuList alignItems="center">
@@ -67,7 +63,7 @@ const Nav = ({ isLoggedIn } : NavProps) => {
         <br />
         <MenuDivider />
         <Link href="/">
-          <MenuItem>Your Packages</MenuItem>
+          <MenuItem>Package List</MenuItem>
         </Link>
         <MenuItem onClick={handleLogOutClick}>Logout</MenuItem>
       </MenuList>
@@ -110,6 +106,7 @@ const Nav = ({ isLoggedIn } : NavProps) => {
       </Link>
     </Stack>
   );
+
   return (
     <Box bg={useColorModeValue('gray.200', 'gray.900')} px={4}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
@@ -122,7 +119,7 @@ const Nav = ({ isLoggedIn } : NavProps) => {
             <Button onClick={toggleColorMode}>
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
-            <Menu>
+            <Menu isLazy>
               {isLoggedIn ? UserButton : SignInButtonGroup}
             </Menu>
           </Stack>

@@ -1,5 +1,6 @@
 import {
   useMemo,
+  useEffect,
   createContext,
   Dispatch,
   FC,
@@ -28,6 +29,27 @@ const AppProvider: FC = ({ children }) => {
     reducer,
     initialState,
   );
+
+  useEffect(() => {
+    const localState = localStorage.getItem('state');
+    if (localState === null) {
+      return;
+    }
+    const parsedState: State = JSON.parse(localState);
+    dispatch({
+      type: 'SetState',
+      payload: {
+        username: parsedState.username,
+        email: parsedState.email,
+        token: parsedState.token,
+      },
+    });
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('state', JSON.stringify(state));
+  }, [state]);
+
   const context = useMemo(() => ({
     state,
     dispatch,
