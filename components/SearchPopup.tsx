@@ -35,7 +35,8 @@ const SearchPopup = () => {
   };
 
   const wrapOnClose = () => {
-    console.log(value);
+    setValue('');
+    setMatchedPackge(PackageList);
     onClose();
   };
 
@@ -44,7 +45,7 @@ const SearchPopup = () => {
       <Button onClick={onOpen} background="none" p={0}>
         <Search2Icon />
       </Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <Modal isOpen={isOpen} onClose={wrapOnClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader textAlign="center">Search Existing Package</ModalHeader>
