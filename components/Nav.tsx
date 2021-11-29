@@ -1,4 +1,7 @@
 import {
+  useContext,
+} from 'react';
+import {
   chakra,
   Box,
   Flex,
@@ -15,9 +18,9 @@ import {
   Center,
 } from '@chakra-ui/react';
 import Link from 'next/link';
-import { useContext } from 'react';
-import { AppContext } from '../context/context';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
+
+import { AppContext } from '../context/context';
 
 interface NavProps {
   isLoggedIn: boolean;
@@ -36,19 +39,21 @@ const Nav = ({ isLoggedIn } : NavProps) => {
       },
     });
   };
-  const userButton = (
+  const UserButton = (
     <>
       <MenuButton
         as={Button}
-        rounded="full"
-        variant="link"
         cursor="pointer"
         minW={0}
+        leftIcon={(
+          <Avatar
+            size="sm"
+          />
+        )}
       >
-        <Avatar
-          size="sm"
-        />
+        { state.username }
       </MenuButton>
+
       <MenuList alignItems="center">
         <br />
         <Center>
@@ -56,18 +61,19 @@ const Nav = ({ isLoggedIn } : NavProps) => {
         </Center>
         <br />
         <Center>
-          <p>Username</p>
+          <p>{ state.username }</p>
         </Center>
         <br />
         <MenuDivider />
-        <Link href='#'>
+        <Link href="/">
           <MenuItem>Your Packages</MenuItem>
         </Link>
         <MenuItem onClick={handleLogOutClick}>Logout</MenuItem>
       </MenuList>
     </>
   );
-  const signInBtnGroup = (
+
+  const SignInButtonGroup = (
     <Stack
       flex={{ base: 1, md: 0 }}
       justify="flex-end"
@@ -116,7 +122,7 @@ const Nav = ({ isLoggedIn } : NavProps) => {
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
             <Menu>
-              {isLoggedIn ? userButton : signInBtnGroup}
+              {isLoggedIn ? UserButton : SignInButtonGroup}
             </Menu>
           </Stack>
         </Flex>

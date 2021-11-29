@@ -1,12 +1,13 @@
+import { useContext } from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 import SearchBox from '../components/SearchBox';
 import Nav from '../components/Nav';
 import ItemList from '../components/ItemList';
-import { useContext } from 'react';
-import { AppContext } from '../context/context';
+
 import { PackageList } from '../public/fakeData';
+import { AppContext } from '../context/context';
 
 const Home: NextPage = () => {
   const { state } = useContext(AppContext);
@@ -17,7 +18,7 @@ const Home: NextPage = () => {
         <title>BTracker</title>
       </Head>
 
-      <Nav isLoggedIn={state.token !== '' } />
+      <Nav isLoggedIn={state.token !== ''} />
       <div>
         <main>
           <SearchBox />
