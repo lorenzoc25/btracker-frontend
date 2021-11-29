@@ -5,6 +5,12 @@ const reducer = (
   action: Action,
 ) => {
   switch (action.type) {
+    case 'SetState':
+      state.token = action.payload.token;
+      state.username = action.payload.username;
+      state.email = action.payload.email;
+      break;
+
     case 'SetToken':
       state.token = action.payload.token;
       break;
