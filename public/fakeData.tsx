@@ -29,4 +29,4 @@ const p2 : Package = {
   status: Status.OutOfDelivery,
 };
 
-export const PackageList = [p, p2];
+export default [p, p2];

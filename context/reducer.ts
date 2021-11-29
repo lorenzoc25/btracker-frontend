@@ -9,6 +9,11 @@ const reducer = (
       state.token = action.payload.token;
       state.username = action.payload.username;
       state.email = action.payload.email;
+      state.packageList = action.payload.packageList;
+      break;
+
+    case 'SetPackageList':
+      state.packageList = action.payload.packageList;
       break;
 
     case 'SetToken':

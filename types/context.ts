@@ -1,7 +1,10 @@
+import { Package } from './package';
+
 export interface State {
   token: string;
   username: string;
   email: string;
+  packageList: Package[];
 }
 
 interface SetState {
@@ -10,6 +13,14 @@ interface SetState {
     username: string;
     email: string;
     token: string;
+    packageList: Package[];
+  };
+}
+
+interface SetPackageList {
+  type: 'SetPackageList';
+  payload: {
+    packageList: Package[];
   };
 }
 
@@ -36,6 +47,7 @@ interface SetEmailAction {
 
 export type Action =
   | SetState
+  | SetPackageList
   | SetTokenAction
   | SetUsernameAction
   | SetEmailAction;
