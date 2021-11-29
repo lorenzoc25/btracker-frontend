@@ -32,9 +32,12 @@ const Nav = ({ isLoggedIn } : NavProps) => {
   const textBgDark = useColorModeValue('blue.400', 'blue.300');
   const handleLogOutClick = () => {
     dispatch({
-      type: 'SetToken',
+      type: 'SetState',
       payload: {
         token: '',
+        username: '',
+        email: '',
+        packageList: [],
       },
     });
   };
