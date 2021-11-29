@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { useState, useContext, useEffect } from 'react';
+import {
+  useState,
+  useContext,
+  useEffect,
+} from 'react';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import {

@@ -19,7 +19,7 @@ const HistStat = ({
   } = hist;
 
   const date = new Date(timestamp);
-  const dateStr = `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`;
+  const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
   return (
     <Flex
       my={0}
@@ -34,7 +34,7 @@ const HistStat = ({
           <chakra.h3
             color={useColorModeValue('gray.800', 'white')}
             fontWeight="medium"
-            fontSize="3xl"
+            fontSize="2xl"
           >
             {dateStr}
           </chakra.h3>

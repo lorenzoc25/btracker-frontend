@@ -45,9 +45,34 @@ interface SetEmailAction {
   };
 }
 
+interface AddPackage {
+  type: 'AddPackage';
+  payload: {
+    package: Package;
+  };
+}
+
+interface UpdatePackage {
+  type: 'UpdatePackage';
+  payload: {
+    tracking: string;
+    name: string;
+  };
+}
+
+interface DeletePackage {
+  type: 'DeletePackage',
+  payload: {
+    tracking: string;
+  };
+}
+
 export type Action =
   | SetState
   | SetPackageList
   | SetTokenAction
   | SetUsernameAction
-  | SetEmailAction;
+  | SetEmailAction
+  | AddPackage
+  | UpdatePackage
+  | DeletePackage;
