@@ -42,7 +42,7 @@ const Home: NextPage = () => {
         dispatch({
           type: 'SetPackageList',
           payload: {
-            packageList: response.data,
+            packageList: response.data || [],
           },
         });
       } catch (error) {
