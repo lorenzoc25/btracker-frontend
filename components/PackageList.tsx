@@ -1,3 +1,4 @@
+import { Box, Text } from '@chakra-ui/react';
 import Package from './Package';
 import { Package as PackageType } from '../types/package';
 
@@ -9,7 +10,13 @@ interface PackageListProps {
 const PackageList = ({
   items,
   isExtended,
-}: PackageListProps) => (
+}: PackageListProps) => (items === undefined ? (
+  <Box textAlign="center">
+    <Text fontSize="md">
+      Your package list is currently empty.
+    </Text>
+  </Box>
+) : (
   <>
     {
       items.map(
@@ -17,6 +24,6 @@ const PackageList = ({
       )
     }
   </>
-);
+));
 
 export default PackageList;

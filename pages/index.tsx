@@ -74,7 +74,8 @@ const Home: NextPage = () => {
       );
     }
 
-    if (state.packageList.length > 0) {
+    if (state.packageList !== undefined
+      && state.packageList.length > 0) {
       return (
         <ItemList
           items={state.packageList}
