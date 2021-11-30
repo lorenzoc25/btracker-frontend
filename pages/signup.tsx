@@ -59,7 +59,7 @@ const SignUpPage: NextPage = () => {
     setLoading(true);
     try {
       const response = await axios.post<SignUpResponse>(
-        'http://localhost:4000/user',
+        'https://api.btracker.xyz/user',
         {
           email,
           username,
