@@ -7,7 +7,6 @@ import {
 } from '@chakra-ui/react';
 import { AiOutlineEdit, AiFillDelete } from 'react-icons/ai';
 import { Chrono } from 'react-chrono';
-import { getStatusColor } from './Item';
 import { Package } from '../types/package';
 import ConfirmPopup from './ConfirmPopup';
 import InputPopup from './InputPopup';
@@ -34,19 +33,20 @@ const deleteItem = async () => {
 // }, ...];
 
 const Detail = ({ item }: ItemProps) => {
-  const statColor = getStatusColor(item.status);
   const { history } = item;
-  const { location, timestamp } = history[0];
-  const date = new Date(timestamp);
-  const dateStr = `${date.getFullYear()}/${date.getMonth()}/${date.getDate()}`;
 
-  const histroyList = history.map((event: { status: string; timestamp: number }) => {
+  const histroyList = history.map((event: {
+    status: string;
+    timestamp: number;
+    location: string;
+  }) => {
     const eventDate = new Date(event.timestamp);
     const eventDateStr = `${eventDate.getFullYear()}/${eventDate.getMonth() + 1}/${eventDate.getDate()}`;
+    const status = event.status.split(',')[0];
     const historyItem = {
       title: eventDateStr,
-      cardTitle: event.status,
-      cardDetailedText: `Package was last seen at ${location} on ${eventDateStr}`,
+      cardTitle: `·    ${status}`,
+      cardDetailedText: `${event.status}. Package was last seen at ${event.location} on ${eventDateStr}`,
     };
     return historyItem;
   });
