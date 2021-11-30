@@ -43,36 +43,51 @@ const SignUpPage: NextPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const onUsernameChange = (
+  const handleUsernameChange = (
     event: ChangeEvent<HTMLInputElement>,
   ) => setUsername(event.target.value);
 
-  const onEmailChange = (
+  const handleEmailChange = (
     event: ChangeEvent<HTMLInputElement>,
   ) => setEmail(event.target.value);
 
-  const onPasswordChange = (
+  const handlePasswordChange = (
     event: ChangeEvent<HTMLInputElement>,
   ) => setPassword(event.target.value);
 
-  const onButtonClick = async () => {
+  const handleButtonClick = async () => {
     setLoading(true);
     try {
       const response = await axios.post<SignUpResponse>(
-        'http://localhost:4000/user',
+        '/user',
         {
           email,
           username,
           password,
         },
       );
-      const { token } = response.data;
+
       dispatch({
         type: 'SetToken',
         payload: {
-          token,
+          token: response.data.token,
         },
       });
+
+      dispatch({
+        type: 'SetUsername',
+        payload: {
+          username: response.data.username,
+        },
+      });
+
+      dispatch({
+        type: 'SetEmail',
+        payload: {
+          email: response.data.email,
+        },
+      });
+
       router.push('/');
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -94,7 +109,7 @@ const SignUpPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>BTracker</title>
+        <title>Sign Up | BTracker</title>
       </Head>
 
       <Flex
@@ -105,10 +120,17 @@ const SignUpPage: NextPage = () => {
       >
         <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
           <Stack align="center">
-            <Heading fontSize="4xl" textAlign="center">
+            <Heading
+              textAlign="center"
+              fontSize="4xl"
+            >
               Sign up
             </Heading>
-            <Text fontSize="lg" color="gray.600">
+            <Text
+              textAlign="center"
+              fontSize="lg"
+              color="gray.600"
+            >
               to gain access to easily track all your packages
             </Text>
           </Stack>
@@ -125,7 +147,7 @@ const SignUpPage: NextPage = () => {
                 <Input
                   type="text"
                   value={username}
-                  onChange={onUsernameChange}
+                  onChange={handleUsernameChange}
                 />
               </FormControl>
 
@@ -134,7 +156,7 @@ const SignUpPage: NextPage = () => {
                 <Input
                   type="email"
                   value={email}
-                  onChange={onEmailChange}
+                  onChange={handleEmailChange}
                 />
               </FormControl>
 
@@ -144,7 +166,7 @@ const SignUpPage: NextPage = () => {
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     value={password}
-                    onChange={onPasswordChange}
+                    onChange={handlePasswordChange}
                   />
                   <InputRightElement h="full">
                     <Button
@@ -166,7 +188,7 @@ const SignUpPage: NextPage = () => {
                   _hover={{
                     bg: 'blue.500',
                   }}
-                  onClick={onButtonClick}
+                  onClick={handleButtonClick}
                 >
                   Sign up
                 </Button>
@@ -176,8 +198,15 @@ const SignUpPage: NextPage = () => {
                 <Text align="center">
                   Already a user?
                   {' '}
-                  <Link href="/login">
-                    Login
+                  <Link
+                    href="/login"
+                  >
+                    <Text
+                      as="span"
+                      color="blue.500"
+                    >
+                      Login
+                    </Text>
                   </Link>
                 </Text>
               </Stack>

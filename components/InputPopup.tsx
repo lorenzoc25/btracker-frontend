@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { ChangeEvent } from 'react';
 import {
   Button,
   Input,
@@ -13,27 +13,34 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react';
 
-interface InfoPopupProps {
-  content : any;
-  title : string;
-  placeholder : string;
+interface InputPopupProps {
+  content: any;
+  title: string;
+  placeholder: string;
+  action: () => void;
+  value: string;
+  handleInputChange: (
+    event: ChangeEvent<HTMLInputElement>,
+  ) => void;
 }
 
-const InfoPopup = ({ content, title, placeholder } : InfoPopupProps) => {
+const InputPopup = ({
+  content,
+  title,
+  placeholder,
+  action,
+  value,
+  handleInputChange,
+}: InputPopupProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [value, setValue] = useState('');
-  const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => setValue(event.target.value);
-
   const wrapOnClose = () => {
-    console.log(value);
+    action();
     onClose();
   };
 
   return (
     <>
-      <Button onClick={onOpen} background="none" p={0}>
+      <Button onClick={onOpen} p={0} background="transparent">
         {content}
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -48,13 +55,18 @@ const InfoPopup = ({ content, title, placeholder } : InfoPopupProps) => {
                 mx={3}
                 placeholder={placeholder}
                 value={value}
-                onChange={handleChange}
+                onChange={handleInputChange}
               />
             </InputGroup>
           </ModalBody>
 
           <ModalFooter justifyContent="space-around">
-            <Button colorScheme="blue" mr={3} onClick={wrapOnClose}>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              isDisabled={value === ''}
+              onClick={wrapOnClose}
+            >
               Confirm
             </Button>
           </ModalFooter>
@@ -64,4 +76,4 @@ const InfoPopup = ({ content, title, placeholder } : InfoPopupProps) => {
   );
 };
 
-export default InfoPopup;
+export default InputPopup;

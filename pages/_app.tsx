@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+import axios from 'axios';
 import { AppProps } from 'next/app';
 import {
   ChakraProvider,
@@ -6,6 +8,12 @@ import {
 } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 import { AppProvider } from '../context/context';
+
+if (process.env.NODE_ENV === 'production') {
+  axios.defaults.baseURL = 'https://api.btracker.xyz';
+} else {
+  axios.defaults.baseURL = 'http://localhost:4000';
+}
 
 const theme = extendTheme({
   styles: {

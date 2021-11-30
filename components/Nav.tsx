@@ -17,6 +17,7 @@ import {
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 import { useContext } from 'react';
+import SearchPopup from './SearchPopup';
 import { AppContext } from '../context/context';
 
 interface NavProps {
@@ -25,30 +26,34 @@ interface NavProps {
 
 const Nav = ({ isLoggedIn } : NavProps) => {
   const { state, dispatch } = useContext(AppContext);
+
   const { colorMode, toggleColorMode } = useColorMode();
   const textBgLight = useColorModeValue('blue', 'blue.100');
   const textBgDark = useColorModeValue('blue.400', 'blue.300');
   const handleLogOutClick = () => {
     dispatch({
-      type: 'SetToken',
+      type: 'SetState',
       payload: {
         token: '',
+        username: '',
+        email: '',
+        packageList: [],
       },
     });
   };
-  const userButton = (
+
+  const UserButton = (
     <>
+      <SearchPopup />
       <MenuButton
         as={Button}
-        rounded="full"
-        variant="link"
-        cursor="pointer"
-        minW={0}
+        background="transparent"
       >
         <Avatar
           size="sm"
         />
       </MenuButton>
+
       <MenuList alignItems="center">
         <br />
         <Center>
@@ -56,23 +61,27 @@ const Nav = ({ isLoggedIn } : NavProps) => {
         </Center>
         <br />
         <Center>
-          <p>Username</p>
+          <p>{ state.username }</p>
         </Center>
         <br />
         <MenuDivider />
-        <Link href='/'>
-          <MenuItem>Your Packages</MenuItem>
+
+        <Link href="/">
+          <MenuItem>Package List</MenuItem>
         </Link>
         <MenuItem onClick={handleLogOutClick}>Logout</MenuItem>
       </MenuList>
     </>
   );
-  const signInBtnGroup = (
+
+  const SignInButtonGroup = (
     <Stack
-      flex={{ base: 1, md: 0 }}
       justify="flex-end"
       direction="row"
-      spacing={6}
+      spacing={{
+        base: 2,
+        md: 4,
+      }}
     >
       <Link
         href="/login"
@@ -89,7 +98,6 @@ const Nav = ({ isLoggedIn } : NavProps) => {
         href="/signup"
       >
         <Button
-          display={{ base: 'none', md: 'inline-flex' }}
           fontSize="sm"
           fontWeight={600}
           color="white"
@@ -103,6 +111,7 @@ const Nav = ({ isLoggedIn } : NavProps) => {
       </Link>
     </Stack>
   );
+
   return (
     <Box bg={useColorModeValue('gray.200', 'gray.900')} px={4}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
@@ -111,12 +120,21 @@ const Nav = ({ isLoggedIn } : NavProps) => {
           <chakra.p fontWeight="bold" bgGradient={`linear(to-l, ${textBgLight}, ${textBgDark})`} bgClip="text">Btracker</chakra.p>
         </Box>
         <Flex alignItems="center">
-          <Stack direction="row" spacing={7}>
-            <Button onClick={toggleColorMode}>
+          <Stack
+            direction="row"
+            spacing={{
+              base: 0,
+              md: 4,
+            }}
+          >
+            <Button
+              background="transparent"
+              onClick={toggleColorMode}
+            >
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
-            <Menu>
-              {isLoggedIn ? userButton : signInBtnGroup}
+            <Menu isLazy>
+              {isLoggedIn ? UserButton : SignInButtonGroup}
             </Menu>
           </Stack>
         </Flex>
