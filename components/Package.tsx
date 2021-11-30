@@ -20,7 +20,7 @@ import ConfirmPopup from './ConfirmPopup';
 import InputPopup from './InputPopup';
 import HistStat from './HistStat';
 import { AppContext } from '../context/context';
-import { Package as PackageType, Status } from '../types/package';
+import { Package as PackageType, History as HistoryType, Status } from '../types/package';
 
 interface PackageProps {
   item: PackageType;
@@ -46,16 +46,31 @@ const getStatusColor = (status: Status): string[] => {
   return ['red.500', 'red.400'];
 };
 
+const getHistInfo = (history : HistoryType[]) => {
+  const location = history[0] === undefined ? 'N/A' : history[0].location;
+  const timestamp = history[0] === undefined ? 'N/A' : history[0].timestamp;
+  return [location, timestamp];
+};
+
+const notFoundMsg = 'Unable to get the tracking information for this package.';
+
+const getMsg = (location : string | number, timestamp : string | number) => {
+  if (timestamp === 'N/A' && location === 'N/A') {
+    return notFoundMsg;
+  }
+  const date = new Date(timestamp);
+  const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+  return `Package was last seen at ${location} on ${dateStr}`;
+};
+
 const Package = ({ item, isExtended }: PackageProps) => {
   const toast = useToast();
   const { state, dispatch } = useContext(AppContext);
   const [inputValue, setInputValue] = useState(item.name);
   const statColor = getStatusColor(item.status);
   const { history } = item;
-  const { location, timestamp } = history[0];
-  const date = new Date(timestamp);
-  const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-
+  const [location, timestamp] = getHistInfo(history);
+  const packageMsg = getMsg(location, timestamp);
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement>,
   ) => setInputValue(event.target.value);
@@ -220,13 +235,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
 
           {isExtended ? (
             <Flex>
-              Package was last seen at
-              {' '}
-              {location}
-              {' '}
-              on
-              {' '}
-              {dateStr}
+              {packageMsg}
             </Flex>
           ) : (
             <Flex justifyContent="center">
@@ -236,7 +245,9 @@ const Package = ({ item, isExtended }: PackageProps) => {
             </Flex>
           )}
 
-          {isExtended && (
+          {(isExtended
+          && packageMsg !== notFoundMsg
+          ) && (
             <Accordion allowToggle>
               <AccordionItem border="hidden">
                 <AccordionButton mr={2} _hover={{ color: useColorModeValue('gray.700', 'gray.300') }} _focus={{ boxShadow: 'none' }} textAlign="center" padding={0}>
