@@ -240,7 +240,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
           ) : (
             <Flex justifyContent="center">
               {packageMsg !== notFoundMsg && (
-              <Link color="blue.400" href={`/${item.tracking}`}>
+              <Link color="blue.400" href={`/detail/${item.tracking}`}>
                 View Detail
               </Link>
               )}
@@ -265,7 +265,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
                     }
                   </Stack>
                   <Flex justifyContent="center" mt="1em">
-                    <Link color="blue.400" href={`/${item.tracking}`}>View More</Link>
+                    <Link color="blue.400" href={`/detail/${item.tracking}`}>View More</Link>
                   </Flex>
                 </AccordionPanel>
               </AccordionItem>

@@ -65,6 +65,7 @@ const Nav = ({ isLoggedIn } : NavProps) => {
         </Center>
         <br />
         <MenuDivider />
+
         <Link href="/">
           <MenuItem>Package List</MenuItem>
         </Link>
