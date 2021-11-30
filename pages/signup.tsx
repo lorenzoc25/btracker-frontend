@@ -198,8 +198,15 @@ const SignUpPage: NextPage = () => {
                 <Text align="center">
                   Already a user?
                   {' '}
-                  <Link href="/login">
-                    Login
+                  <Link
+                    href="/login"
+                  >
+                    <Text
+                      as="span"
+                      color="blue.500"
+                    >
+                      Login
+                    </Text>
                   </Link>
                 </Text>
               </Stack>
