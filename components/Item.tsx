@@ -22,7 +22,7 @@ interface ItemProps {
   item: Package;
 }
 
-const getStatusColor = (status: Status): string[] => {
+export const getStatusColor = (status: Status): string[] => {
   if (status === Status.Delivered) {
     return ['green.600', 'green.200'];
   } if (status === Status.OutOfDelivery) {
@@ -135,6 +135,7 @@ const Item = ({ item }: ItemProps) => {
             {location}
             {' '}
             on
+            {' '}
             {dateStr}
           </Flex>
           <Accordion allowToggle>
@@ -152,7 +153,7 @@ const Item = ({ item }: ItemProps) => {
                     }
                 </Stack>
                 <Flex justifyContent="center" mt="1em">
-                  <Link color="blue.400" href="#">View More</Link>
+                  <Link color="blue.400" href={`\\${item.tracking}`}>View More</Link>
                 </Flex>
               </AccordionPanel>
             </AccordionItem>

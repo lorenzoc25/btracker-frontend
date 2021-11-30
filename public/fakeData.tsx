@@ -6,6 +6,7 @@ const h1 :History = {
   message: 'Left at the front door♂.',
   timestamp: 1145141919810,
 };
+
 const h2 :History = {
   status: 'In Transit',
   location: 'Santa Barbra',
