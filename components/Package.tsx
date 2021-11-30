@@ -49,7 +49,7 @@ const getStatusColor = (status: Status): string[] => {
 const Package = ({ item, isExtended }: PackageProps) => {
   const toast = useToast();
   const { state, dispatch } = useContext(AppContext);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(item.name);
   const statColor = getStatusColor(item.status);
   const { history } = item;
   const { location, timestamp } = history[0];
@@ -246,10 +246,10 @@ const Package = ({ item, isExtended }: PackageProps) => {
                 <AccordionPanel px={0} pb="1em">
                   <Stack align="stretch">
                     {
-                        history.map(
-                          (hist) => <HistStat key={hist.timestamp} hist={hist} />,
-                        )
-                      }
+                      history.map(
+                        (hist) => <HistStat key={hist.timestamp} hist={hist} />,
+                      )
+                    }
                   </Stack>
                   <Flex justifyContent="center" mt="1em">
                     <Link color="blue.400" href={`/${item.tracking}`}>View More</Link>
