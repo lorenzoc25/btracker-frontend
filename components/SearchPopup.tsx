@@ -55,7 +55,7 @@ const SearchPopup = () => {
 
   return (
     <>
-      <Button onClick={onOpen} background="none" p={0}>
+      <Button onClick={onOpen} background="transparent" p={0}>
         <Search2Icon />
       </Button>
       <Modal isOpen={isOpen} onClose={wrapOnClose} size="xl">

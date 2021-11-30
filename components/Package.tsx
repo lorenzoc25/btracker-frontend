@@ -131,8 +131,8 @@ const Package = ({ item, isExtended }: PackageProps) => {
 
   return (
     <Flex
-      py={2}
-      px={{ base: 0, md: 35, lg: 50 }}
+      pb={4}
+      px={{ base: 4, md: 35, lg: 50 }}
       w="full"
       alignItems="center"
       justifyContent="center"
@@ -221,6 +221,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
               {item.status}
             </chakra.p>
           </Flex>
+
           {isExtended ? (
             <Flex>
               Package was last seen at
@@ -231,36 +232,36 @@ const Package = ({ item, isExtended }: PackageProps) => {
               {' '}
               {dateStr}
             </Flex>
-          )
-            : (
-              <Flex justifyContent="center">
-                <Link color="blue.400" href={`/${item.tracking}`}>
-                  View Detail
-                </Link>
-              </Flex>
-            )}
-          {isExtended && (
-          <Accordion allowToggle>
-            <AccordionItem border="hidden">
-              <AccordionButton mr={2} _hover={{ color: useColorModeValue('gray.700', 'gray.300') }} _focus={{ boxShadow: 'none' }} textAlign="center" padding={0}>
-                <AccordionIcon marginX="auto" />
-              </AccordionButton>
+          ) : (
+            <Flex justifyContent="center">
+              <Link color="blue.400" href={`/${item.tracking}`}>
+                View Detail
+              </Link>
+            </Flex>
+          )}
 
-              <AccordionPanel px={0} pb="1em">
-                <Stack align="stretch">
-                  {
-                      history.map(
-                        (hist) => <HistStat key={hist.timestamp} hist={hist} />,
-                      )
-                    }
-                </Stack>
-                <Flex justifyContent="center" mt="1em">
-                  <Link color="blue.400" href={`/${item.tracking}`}>View More</Link>
-                </Flex>
-              </AccordionPanel>
-            </AccordionItem>
-          </Accordion>
-          ) }
+          {isExtended && (
+            <Accordion allowToggle>
+              <AccordionItem border="hidden">
+                <AccordionButton mr={2} _hover={{ color: useColorModeValue('gray.700', 'gray.300') }} _focus={{ boxShadow: 'none' }} textAlign="center" padding={0}>
+                  <AccordionIcon marginX="auto" />
+                </AccordionButton>
+
+                <AccordionPanel px={0} pb="1em">
+                  <Stack align="stretch">
+                    {
+                        history.map(
+                          (hist) => <HistStat key={hist.timestamp} hist={hist} />,
+                        )
+                      }
+                  </Stack>
+                  <Flex justifyContent="center" mt="1em">
+                    <Link color="blue.400" href={`/${item.tracking}`}>View More</Link>
+                  </Flex>
+                </AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+          )}
         </Box>
       </Box>
     </Flex>

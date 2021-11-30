@@ -78,11 +78,16 @@ const SearchBox = () => {
       justify="center"
     >
       <InputGroup
-        w="70%"
+        mr={4}
+        w={{
+          base: 'full',
+          md: '75%',
+        }}
       >
         <Input
           rounded="lg"
-          mx={3}
+          ml={4}
+          mr={2}
           placeholder="Enter a tracking number"
           value={tracking}
           onChange={handleChange}
