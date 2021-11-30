@@ -91,9 +91,10 @@ const SearchBox = () => {
           value={tracking}
           onChange={handleChange}
           bg={useColorModeValue('white', 'gray.600')}
+          disabled={state.token === ''}
         />
         <Button
-          disabled={tracking === ''}
+          disabled={tracking === '' || state.token === ''}
           colorScheme="blue"
           isLoading={loading}
           onClick={handleClick}

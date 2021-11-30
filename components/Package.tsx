@@ -239,9 +239,11 @@ const Package = ({ item, isExtended }: PackageProps) => {
             </Flex>
           ) : (
             <Flex justifyContent="center">
+              {packageMsg !== notFoundMsg && (
               <Link color="blue.400" href={`/${item.tracking}`}>
                 View Detail
               </Link>
+              )}
             </Flex>
           )}
 
