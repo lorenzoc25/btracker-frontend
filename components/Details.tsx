@@ -29,10 +29,6 @@ interface PackageDeleteResponse {
   deletedCount: number;
 }
 
-interface PackageUpdateResponse {
-
-}
-
 const getStatusColor = (status: Status): string[] => {
   if (status === Status.Delivered) {
     return ['green.600', 'green.200'];
@@ -44,7 +40,7 @@ const getStatusColor = (status: Status): string[] => {
   return ['red.500', 'red.400'];
 };
 
-const Package = ({ item }: PackageProps) => {
+const Details = ({ item }: PackageProps) => {
   const router = useRouter();
   const { tracking } = router.query;
   const toast = useToast();
@@ -53,7 +49,6 @@ const Package = ({ item }: PackageProps) => {
   const statColor = getStatusColor(item.status);
   const handleCopy = () => {
   };
-  const { history } = item;
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement>,
   ) => setInputValue(event.target.value);
@@ -93,7 +88,7 @@ const Package = ({ item }: PackageProps) => {
 
   const handleUpdatePackage = async () => {
     try {
-      await axios.put<PackageUpdateResponse>(
+      await axios.put<PackageType>(
         `http://localhost:4000/tracking/${item.tracking}`,
         {
           tracking: item.tracking,
@@ -217,12 +212,12 @@ const Package = ({ item }: PackageProps) => {
 
           <Stack align="stretch">
             {
-              history.map(
+              item.history?.map(
                 (hist) => <HistStat key={hist.timestamp} hist={hist} />,
               )
             }
           </Stack>
-          <CopyToClipboard text={`https://btracker.xyz/details/${tracking}`} onCopy={handleCopy}>
+          <CopyToClipboard text={`https://btracker.xyz/detail/${tracking}`} onCopy={handleCopy}>
             <Center p={8}>
               <Button
                 w="full"
@@ -249,4 +244,4 @@ const Package = ({ item }: PackageProps) => {
   );
 };
 
-export default Package;
+export default Details;
