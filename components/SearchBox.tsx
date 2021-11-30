@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { useContext, useState } from 'react';
+import {
+  useContext,
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+} from 'react';
 import {
   InputGroup,
   Input,
@@ -18,14 +23,16 @@ const SearchBox = () => {
   const [loading, setLoading] = useState(false);
   const [tracking, setTracking] = useState('');
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
+    event: ChangeEvent<HTMLInputElement>,
   ) => setTracking(event.target.value);
 
   const handleClick = async () => {
-    if (state.packageList !== undefined
+    if (
+      state.packageList !== undefined
       && state.packageList.some(
         (item) => item.tracking === tracking,
-      )) {
+      )
+    ) {
       toast({
         title: 'The package exists in the package list',
         status: 'info',
@@ -35,6 +42,7 @@ const SearchBox = () => {
       return;
     }
     setLoading(true);
+
     try {
       const response = await axios.post<Package>(
         `/tracking/${tracking}`,
@@ -71,6 +79,14 @@ const SearchBox = () => {
     }
   };
 
+  const handleKeyboard = async (
+    event: KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.key === 'Enter') {
+      await handleClick();
+    }
+  };
+
   return (
     <Flex
       my="2em"
@@ -90,6 +106,7 @@ const SearchBox = () => {
           placeholder="Enter a tracking number"
           value={tracking}
           onChange={handleChange}
+          onKeyPress={handleKeyboard}
           bg={useColorModeValue('white', 'gray.600')}
           disabled={state.token === ''}
         />

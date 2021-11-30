@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { useState, KeyboardEvent, ChangeEvent } from 'react';
 import {
   Button,
   Input,
@@ -17,7 +17,7 @@ interface InputPopupProps {
   content: any;
   title: string;
   placeholder: string;
-  action: () => void;
+  action: () => Promise<void>;
   value: string;
   handleInputChange: (
     event: ChangeEvent<HTMLInputElement>,
@@ -33,9 +33,21 @@ const InputPopup = ({
   handleInputChange,
 }: InputPopupProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const wrapOnClose = () => {
-    action();
+  const [loading, setLoading] = useState(false);
+
+  const wrapOnClose = async () => {
+    setLoading(true);
+    await action();
+    setLoading(false);
     onClose();
+  };
+
+  const handleKeyboard = async (
+    event: KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.key === 'Enter') {
+      await wrapOnClose();
+    }
   };
 
   return (
@@ -56,6 +68,7 @@ const InputPopup = ({
                 placeholder={placeholder}
                 value={value}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyboard}
               />
             </InputGroup>
           </ModalBody>
@@ -64,6 +77,7 @@ const InputPopup = ({
             <Button
               colorScheme="blue"
               mr={3}
+              isLoading={loading}
               isDisabled={value === ''}
               onClick={wrapOnClose}
             >

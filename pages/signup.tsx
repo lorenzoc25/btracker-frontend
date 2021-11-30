@@ -20,6 +20,7 @@ import {
   useState,
   useContext,
   ChangeEvent,
+  KeyboardEvent,
 } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -106,6 +107,14 @@ const SignUpPage: NextPage = () => {
     }
   };
 
+  const handleKeyboard = async (
+    event: KeyboardEvent<HTMLInputElement>,
+  ) => {
+    if (event.key === 'Enter') {
+      await handleButtonClick();
+    }
+  };
+
   return (
     <>
       <Head>
@@ -167,6 +176,7 @@ const SignUpPage: NextPage = () => {
                     type={showPassword ? 'text' : 'password'}
                     value={password}
                     onChange={handlePasswordChange}
+                    onKeyPress={handleKeyboard}
                   />
                   <InputRightElement h="full">
                     <Button
