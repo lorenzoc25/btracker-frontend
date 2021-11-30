@@ -14,10 +14,10 @@ import {
   useColorMode,
   Center,
 } from '@chakra-ui/react';
+import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import Link from 'next/link';
 import { useContext } from 'react';
 import { AppContext } from '../context/context';
-import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
 interface NavProps {
   isLoggedIn: boolean;
@@ -60,7 +60,7 @@ const Nav = ({ isLoggedIn } : NavProps) => {
         </Center>
         <br />
         <MenuDivider />
-        <Link href='#'>
+        <Link href='/'>
           <MenuItem>Your Packages</MenuItem>
         </Link>
         <MenuItem onClick={handleLogOutClick}>Logout</MenuItem>
