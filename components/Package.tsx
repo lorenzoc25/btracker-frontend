@@ -151,10 +151,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
             fontSize="sm"
             color={useColorModeValue('gray.800', 'gray.400')}
           >
-            {item.carrier}
-            {' '}
-            -
-            {item.tracking}
+            {`${item.carrier} - ${item.tracking}`}
           </chakra.span>
           {isExtended && (
             <chakra.span
@@ -211,8 +208,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
             <chakra.p
               fontWeight="light"
             >
-              Status:
-              {' '}
+              Status:&nbsp;
             </chakra.p>
             <chakra.p
               fontWeight="semibold"
