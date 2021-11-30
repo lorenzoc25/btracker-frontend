@@ -68,7 +68,6 @@ const SearchBox = () => {
       }
     } finally {
       setLoading(false);
-      setTracking('');
     }
   };
 
