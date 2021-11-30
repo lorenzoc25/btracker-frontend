@@ -38,7 +38,7 @@ interface PackageUpdateResponse {
 const getStatusColor = (status: Status): string[] => {
   if (status === Status.Delivered) {
     return ['green.600', 'green.200'];
-  } if (status === Status.OutOfDelivery) {
+  } if (status === Status.Accepted) {
     return ['orange.400', 'orange.300'];
   } if (status === Status.InTransit) {
     return ['cyan.600', 'cyan.200'];
@@ -71,6 +71,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
   const { history } = item;
   const [location, timestamp] = getHistInfo(history);
   const packageMsg = getMsg(location, timestamp);
+  const displayTracking = item.tracking.length <= 22 ? item.tracking : `${item.tracking.slice(0, 19)}...`;
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement>,
   ) => setInputValue(event.target.value);
@@ -166,7 +167,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
             fontSize="sm"
             color={useColorModeValue('gray.800', 'gray.400')}
           >
-            {`${item.carrier} - ${item.tracking}`}
+            {`${item.carrier} - ${displayTracking}`}
           </chakra.span>
           {isExtended && (
             <chakra.span
