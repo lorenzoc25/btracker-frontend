@@ -32,7 +32,7 @@ const Home: NextPage = () => {
       setLoading(true);
       try {
         const response = await axios.get<Package[]>(
-          'https://api.btracker.xyz/user/tracking',
+          '/user/tracking',
           {
             headers: {
               Authorization: `Bearer ${state.token}`,
