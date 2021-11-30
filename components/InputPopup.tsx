@@ -61,7 +61,12 @@ const InputPopup = ({
           </ModalBody>
 
           <ModalFooter justifyContent="space-around">
-            <Button colorScheme="blue" mr={3} onClick={wrapOnClose}>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              isDisabled={value === ''}
+              onClick={wrapOnClose}
+            >
               Confirm
             </Button>
           </ModalFooter>
