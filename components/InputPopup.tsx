@@ -40,7 +40,7 @@ const InputPopup = ({
 
   return (
     <>
-      <Button onClick={onOpen} background="none" p={0}>
+      <Button onClick={onOpen} p={0} background="transparent">
         {content}
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>

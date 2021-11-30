@@ -75,10 +75,12 @@ const Nav = ({ isLoggedIn } : NavProps) => {
 
   const SignInButtonGroup = (
     <Stack
-      flex={{ base: 1, md: 0 }}
       justify="flex-end"
       direction="row"
-      spacing={6}
+      spacing={{
+        base: 2,
+        md: 4,
+      }}
     >
       <Link
         href="/login"
@@ -95,7 +97,6 @@ const Nav = ({ isLoggedIn } : NavProps) => {
         href="/signup"
       >
         <Button
-          display={{ base: 'none', md: 'inline-flex' }}
           fontSize="sm"
           fontWeight={600}
           color="white"
@@ -118,8 +119,17 @@ const Nav = ({ isLoggedIn } : NavProps) => {
           <chakra.p fontWeight="bold" bgGradient={`linear(to-l, ${textBgLight}, ${textBgDark})`} bgClip="text">Btracker</chakra.p>
         </Box>
         <Flex alignItems="center">
-          <Stack direction="row" spacing={7}>
-            <Button onClick={toggleColorMode}>
+          <Stack
+            direction="row"
+            spacing={{
+              base: 0,
+              md: 4,
+            }}
+          >
+            <Button
+              background="transparent"
+              onClick={toggleColorMode}
+            >
               {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
             </Button>
             <Menu isLazy>

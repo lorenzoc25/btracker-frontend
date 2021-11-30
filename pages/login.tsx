@@ -113,8 +113,17 @@ const LoginPage: NextPage = () => {
       >
         <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
           <Stack align="center">
-            <Heading fontSize="4xl">Sign in to your account</Heading>
-            <Text fontSize="lg" color="gray.600">
+            <Heading
+              fontSize="4xl"
+              textAlign="center"
+            >
+              Sign in to your account
+            </Heading>
+            <Text
+              fontSize="lg"
+              color="gray.600"
+              textAlign="center"
+            >
               to track all your valuable packages
             </Text>
           </Stack>

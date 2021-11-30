@@ -120,10 +120,17 @@ const SignUpPage: NextPage = () => {
       >
         <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
           <Stack align="center">
-            <Heading fontSize="4xl" textAlign="center">
+            <Heading
+              textAlign="center"
+              fontSize="4xl"
+            >
               Sign up
             </Heading>
-            <Text fontSize="lg" color="gray.600">
+            <Text
+              textAlign="center"
+              fontSize="lg"
+              color="gray.600"
+            >
               to gain access to easily track all your packages
             </Text>
           </Stack>
@@ -191,8 +198,15 @@ const SignUpPage: NextPage = () => {
                 <Text align="center">
                   Already a user?
                   {' '}
-                  <Link href="/login">
-                    Login
+                  <Link
+                    href="/login"
+                  >
+                    <Text
+                      as="span"
+                      color="blue.500"
+                    >
+                      Login
+                    </Text>
                   </Link>
                 </Text>
               </Stack>
