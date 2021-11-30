@@ -8,7 +8,7 @@ export interface History {
 export enum Status {
   LabelCreated = 'Label Created',
   InTransit = 'In Transit',
-  OutOfDelivery = 'Out of Delivery',
+  Accepted = 'Accepted',
   Delivered = 'Delivered',
 }
 
