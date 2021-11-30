@@ -42,9 +42,7 @@ const HistStat = ({
             mt={1}
             color={useColorModeValue('gray.700', 'gray.300')}
           >
-            {status}
-            ,
-            {message}
+            {message ? `${status}, ${message}` : status}
           </chakra.p>
           <chakra.p
             color={useColorModeValue('gray.500', 'gray.400')}
