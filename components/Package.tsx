@@ -20,7 +20,7 @@ import ConfirmPopup from './ConfirmPopup';
 import InputPopup from './InputPopup';
 import HistStat from './HistStat';
 import { AppContext } from '../context/context';
-import { Package as PackageType, Status } from '../types/package';
+import { Package as PackageType, History as HistoryType, Status } from '../types/package';
 
 interface PackageProps {
   item: PackageType;
@@ -46,16 +46,29 @@ const getStatusColor = (status: Status): string[] => {
   return ['red.500', 'red.400'];
 };
 
+const getHistInfo = (history : HistoryType[]) => {
+  const location = history === undefined ? 'N/A' : history[0].location;
+  const timestamp = history === undefined ? 'N/A' : history[0].timestamp;
+  return [location, timestamp];
+};
+
+const getDateStr = (timestamp : string | number) => {
+  if (timestamp === 'N/A') {
+    return 'N/A';
+  }
+  const date = new Date(timestamp);
+  const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+  return dateStr;
+};
+
 const Package = ({ item, isExtended }: PackageProps) => {
   const toast = useToast();
   const { state, dispatch } = useContext(AppContext);
   const [inputValue, setInputValue] = useState(item.name);
   const statColor = getStatusColor(item.status);
   const { history } = item;
-  const { location, timestamp } = history[0];
-  const date = new Date(timestamp);
-  const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-
+  const [location, timestamp] = getHistInfo(history);
+  const dateStr = getDateStr(timestamp);
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement>,
   ) => setInputValue(event.target.value);
