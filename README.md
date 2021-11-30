@@ -1,17 +1,17 @@
 <div align="center">
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-typescript.svg)](https://forthebadge.com)
-[![forthebadge](https://img.shields.io/github/workflow/status/booster-labs/rocket-booster/Node.js%20Test%20and%20Build?style=for-the-badge&logo=github)](https://github.com/booster-labs/rocket-booster/actions)
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/built-by-developers.svg)](https://forthebadge.com)
 
 </div>
 
 **Btracker** is a web application that can save and track any package you want in United States. It is the platform of choice for both customers and small businesses. Track for USPS, FedEx, UPS, DHL at Btracker API.
 
 - 📄 TypeScript: Extensive type declaration with TSDoc.
-- ✈️ Load Balancing: Distribute incoming traffics evenly among different upstream services.
-- ⚙️ Hackable: Deliver unique content based on visitor attributes, conduct A/B testing, or build custom middleware to hook into the lifecycle. (Experimental)
-- 📄 TypeScript: Extensive type declaration with TSDoc.
+- :electron: Next.js: Provided Server Side Rendering for Performance and Search engine optimization.
+- 📠 Routing: Use static and dynamic routing with Next.js.
+- 📨 Middleware: Use Context API to store global variables effiently.
+- 🔒 JWT: Self-content, stateless Authentication to reduce server loads.
 
 ## 📦  Build and Run
 First, install the necessary packages:
