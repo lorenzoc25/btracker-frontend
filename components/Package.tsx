@@ -47,18 +47,20 @@ const getStatusColor = (status: Status): string[] => {
 };
 
 const getHistInfo = (history : HistoryType[]) => {
-  const location = history === undefined ? 'N/A' : history[0].location;
-  const timestamp = history === undefined ? 'N/A' : history[0].timestamp;
+  const location = history[0] === undefined ? 'N/A' : history[0].location;
+  const timestamp = history[0] === undefined ? 'N/A' : history[0].timestamp;
   return [location, timestamp];
 };
 
-const getDateStr = (timestamp : string | number) => {
-  if (timestamp === 'N/A') {
-    return 'N/A';
+const notFoundMsg = 'Unable to get the tracking information for this package.';
+
+const getMsg = (location : string | number, timestamp : string | number) => {
+  if (timestamp === 'N/A' && location === 'N/A') {
+    return notFoundMsg;
   }
   const date = new Date(timestamp);
   const dateStr = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-  return dateStr;
+  return `Package was last seen at ${location} on ${dateStr}`;
 };
 
 const Package = ({ item, isExtended }: PackageProps) => {
@@ -68,7 +70,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
   const statColor = getStatusColor(item.status);
   const { history } = item;
   const [location, timestamp] = getHistInfo(history);
-  const dateStr = getDateStr(timestamp);
+  const packageMsg = getMsg(location, timestamp);
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement>,
   ) => setInputValue(event.target.value);
@@ -233,13 +235,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
 
           {isExtended ? (
             <Flex>
-              Package was last seen at
-              {' '}
-              {location}
-              {' '}
-              on
-              {' '}
-              {dateStr}
+              {packageMsg}
             </Flex>
           ) : (
             <Flex justifyContent="center">
@@ -249,7 +245,9 @@ const Package = ({ item, isExtended }: PackageProps) => {
             </Flex>
           )}
 
-          {isExtended && (
+          {(isExtended
+          && packageMsg !== notFoundMsg
+          ) && (
             <Accordion allowToggle>
               <AccordionItem border="hidden">
                 <AccordionButton mr={2} _hover={{ color: useColorModeValue('gray.700', 'gray.300') }} _focus={{ boxShadow: 'none' }} textAlign="center" padding={0}>
