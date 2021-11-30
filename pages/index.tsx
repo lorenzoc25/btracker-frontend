@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
 } from 'react';
+import Link from 'next/link';
 import { NextPage } from 'next';
 import Head from 'next/head';
 import {
@@ -104,7 +105,19 @@ const Home: NextPage = () => {
       <Nav isLoggedIn={state.token !== ''} />
       <div>
         <SearchBox />
-        { renderPackageList() }
+        { state.token !== '' ? renderPackageList() : (
+          <Box textAlign="center" color={textColor}>
+            <Text>
+              {'You haven\'t login yet. '}
+              <Text color="blue.500" display="inline">
+                <Link href="/login">
+                  Login
+                </Link>
+              </Text>
+              {' to see all your packages.'}
+            </Text>
+          </Box>
+        ) }
       </div>
     </>
   );
