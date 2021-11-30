@@ -53,7 +53,7 @@ const LoginPage: NextPage = () => {
     setLoading(true);
     try {
       const response = await axios.post<SignInResponse>(
-        'http://localhost:4000/session',
+        'https://api.btracker.xyz/session',
         {
           email,
           password,

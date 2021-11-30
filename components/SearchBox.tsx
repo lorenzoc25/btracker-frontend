@@ -37,7 +37,7 @@ const SearchBox = () => {
     setLoading(true);
     try {
       const response = await axios.post<Package>(
-        `http://localhost:4000/tracking/${tracking}`,
+        `https://api.btracker.xyz/tracking/${tracking}`,
         {},
         {
           headers: {
