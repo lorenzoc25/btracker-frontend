@@ -1,5 +1,10 @@
 import axios from 'axios';
-import { useState, useContext, ChangeEvent } from 'react';
+import {
+  useState,
+  useContext,
+  memo,
+  ChangeEvent,
+} from 'react';
 import {
   chakra,
   Box,
@@ -278,4 +283,4 @@ const Package = ({ item, isExtended }: PackageProps) => {
   );
 };
 
-export default Package;
+export default memo(Package);
