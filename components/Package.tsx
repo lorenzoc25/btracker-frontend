@@ -78,7 +78,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
   const handleDeletePackage = async () => {
     try {
       const response = await axios.delete<PackageDeleteResponse>(
-        `https://api.btracker.xyz/tracking/${item.tracking}`,
+        `/tracking/${item.tracking}`,
         {
           headers: {
             Authorization: `Bearer ${state.token}`,
@@ -111,7 +111,7 @@ const Package = ({ item, isExtended }: PackageProps) => {
   const handleUpdatePackage = async () => {
     try {
       await axios.put<PackageUpdateResponse>(
-        `https://api.btracker.xyz/tracking/${item.tracking}`,
+        `/tracking/${item.tracking}`,
         {
           tracking: item.tracking,
           name: inputValue,
